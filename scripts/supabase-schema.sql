@@ -1,0 +1,109 @@
+-- Run once in the Supabase SQL editor for your project.
+
+-- 1. profiles ---------------------------------------------------------
+create table if not exists public.profiles (
+  id uuid primary key references auth.users (id) on delete cascade,
+  role text not null default 'user' check (role in ('user', 'admin')),
+  created_at timestamptz not null default now()
+);
+
+alter table public.profiles enable row level security;
+
+create policy "read own profile"
+  on public.profiles for select
+  using (auth.uid() = id);
+
+-- creates a profile row (default role 'user') whenever a user is created —
+-- fires whether they're added via the app or manually in the Supabase
+-- dashboard (Authentication -> Users -> Add user)
+create or replace function public.handle_new_user()
+returns trigger
+language plpgsql
+security definer set search_path = public
+as $$
+begin
+  insert into public.profiles (id) values (new.id);
+  return new;
+end;
+$$;
+
+drop trigger if exists on_auth_user_created on auth.users;
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute function public.handle_new_user();
+
+-- To create an admin: Authentication -> Users -> Add user in the Supabase
+-- dashboard, then run:
+--   update public.profiles set role = 'admin' where id = '<their-user-uuid>';
+-- There is no public signup flow — this is the only way in.
+
+-- 2. gallery_items -----------------------------------------------------
+create table if not exists public.gallery_items (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  media_type text not null check (media_type in ('photo', 'video')),
+  storage_path text not null,
+  url text not null,
+  created_at timestamptz not null default now(),
+  created_by uuid references auth.users (id)
+);
+
+alter table public.gallery_items enable row level security;
+
+create policy "public read gallery"
+  on public.gallery_items for select
+  using (true);
+
+create policy "admins write gallery"
+  on public.gallery_items for all
+  using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'))
+  with check (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
+
+-- 3. annual_reports ------------------------------------------------------
+create table if not exists public.annual_reports (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  year int not null,
+  storage_path text not null,
+  url text not null,
+  created_at timestamptz not null default now(),
+  created_by uuid references auth.users (id)
+);
+
+alter table public.annual_reports enable row level security;
+
+create policy "public read reports"
+  on public.annual_reports for select
+  using (true);
+
+create policy "admins write reports"
+  on public.annual_reports for all
+  using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'))
+  with check (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
+
+-- 4. storage buckets -----------------------------------------------------
+insert into storage.buckets (id, name, public)
+values ('gallery', 'gallery', true)
+on conflict (id) do nothing;
+
+insert into storage.buckets (id, name, public)
+values ('reports', 'reports', true)
+on conflict (id) do nothing;
+
+create policy "public read gallery bucket"
+  on storage.objects for select
+  using (bucket_id = 'gallery');
+
+create policy "admins write gallery bucket"
+  on storage.objects for all
+  using (bucket_id = 'gallery' and exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'))
+  with check (bucket_id = 'gallery' and exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
+
+create policy "public read reports bucket"
+  on storage.objects for select
+  using (bucket_id = 'reports');
+
+create policy "admins write reports bucket"
+  on storage.objects for all
+  using (bucket_id = 'reports' and exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'))
+  with check (bucket_id = 'reports' and exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
