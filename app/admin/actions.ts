@@ -57,6 +57,24 @@ export async function uploadGalleryItem(formData: FormData) {
   return { error: null };
 }
 
+export async function updateGalleryItem(id: string, title: string) {
+  await requireAdmin();
+  const supabase = await createClient();
+
+  const trimmed = title.trim();
+  if (!trimmed) return { error: "Title is required." };
+
+  const { error } = await supabase
+    .from("gallery_items")
+    .update({ title: trimmed })
+    .eq("id", id);
+  if (error) return { error: error.message };
+
+  revalidatePath("/gallery");
+  revalidatePath("/admin");
+  return { error: null };
+}
+
 export async function deleteGalleryItem(id: string, storagePath: string) {
   await requireAdmin();
   const supabase = await createClient();
@@ -110,6 +128,24 @@ export async function uploadAnnualReport(formData: FormData) {
     await supabase.storage.from("reports").remove([path]);
     return { error: insertError.message };
   }
+
+  revalidatePath("/annual-report");
+  revalidatePath("/admin");
+  return { error: null };
+}
+
+export async function updateAnnualReport(id: string, title: string, year: number) {
+  await requireAdmin();
+  const supabase = await createClient();
+
+  const trimmed = title.trim();
+  if (!trimmed || !year) return { error: "Title and year are required." };
+
+  const { error } = await supabase
+    .from("annual_reports")
+    .update({ title: trimmed, year })
+    .eq("id", id);
+  if (error) return { error: error.message };
 
   revalidatePath("/annual-report");
   revalidatePath("/admin");

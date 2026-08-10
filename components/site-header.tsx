@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 
@@ -54,17 +55,14 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 w-full border-b border-emerald-ink/10 bg-parchment/70 backdrop-blur-lg backdrop-saturate-150 supports-[backdrop-filter]:bg-parchment/60">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2.5 shrink-0">
-          <span className="flex size-9 items-center justify-center rounded-md bg-emerald-ink font-heading text-base font-semibold text-parchment">
-            EA
-          </span>
-          <span className="hidden flex-col leading-tight sm:flex">
-            <span className="font-heading text-[0.95rem] font-semibold text-emerald-ink">
-              EARC
-            </span>
-            <span className="text-[0.7rem] text-muted-foreground">
-              Jnana Prabodhini
-            </span>
-          </span>
+          <Image
+            src="/earc_logo.png"
+            alt="EARC logo"
+            width={144}
+            height={86}
+            priority
+            className="h-11 w-auto"
+          />
         </Link>
 
         <NavigationMenu className="hidden lg:flex">

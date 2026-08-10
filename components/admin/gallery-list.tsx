@@ -3,14 +3,17 @@
 import * as React from "react";
 import Image from "next/image";
 import { toast } from "sonner";
-import { Loader2, Trash2, Video } from "lucide-react";
+import { Check, Loader2, Pencil, Trash2, Video, X } from "lucide-react";
 
-import { deleteGalleryItem } from "@/app/admin/actions";
+import { deleteGalleryItem, updateGalleryItem } from "@/app/admin/actions";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import type { GalleryItem } from "@/lib/supabase/types";
 
 export function GalleryList({ items }: { items: GalleryItem[] }) {
   const [pendingId, setPendingId] = React.useState<string | null>(null);
+  const [editingId, setEditingId] = React.useState<string | null>(null);
+  const [draftTitle, setDraftTitle] = React.useState("");
 
   async function handleDelete(item: GalleryItem) {
     setPendingId(item.id);
@@ -21,6 +24,23 @@ export function GalleryList({ items }: { items: GalleryItem[] }) {
       return;
     }
     toast.success("Removed from gallery");
+  }
+
+  function startEdit(item: GalleryItem) {
+    setEditingId(item.id);
+    setDraftTitle(item.title);
+  }
+
+  async function saveEdit(item: GalleryItem) {
+    setPendingId(item.id);
+    const result = await updateGalleryItem(item.id, draftTitle);
+    setPendingId(null);
+    if (result.error) {
+      toast.error("Couldn't save", { description: result.error });
+      return;
+    }
+    setEditingId(null);
+    toast.success("Title updated");
   }
 
   if (items.length === 0) {
@@ -54,25 +74,72 @@ export function GalleryList({ items }: { items: GalleryItem[] }) {
               </span>
             </div>
           )}
-          <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/60 via-transparent to-transparent p-2 opacity-0 transition-opacity group-hover:opacity-100">
-            <p className="line-clamp-1 text-xs font-medium text-white">
-              {item.title}
-            </p>
-          </div>
-          <Button
-            type="button"
-            size="icon-sm"
-            variant="destructive"
-            disabled={pendingId === item.id}
-            onClick={() => handleDelete(item)}
-            className="absolute top-1.5 right-1.5 bg-card/90 backdrop-blur"
-          >
-            {pendingId === item.id ? (
-              <Loader2 className="size-3.5 animate-spin" />
-            ) : (
-              <Trash2 className="size-3.5" />
-            )}
-          </Button>
+
+          {editingId === item.id ? (
+            <div className="absolute inset-x-0 bottom-0 flex items-center gap-1 bg-black/70 p-1.5">
+              <Input
+                autoFocus
+                value={draftTitle}
+                onChange={(e) => setDraftTitle(e.target.value)}
+                className="h-7 border-none bg-white/90 px-2 text-xs"
+              />
+              <Button
+                type="button"
+                size="icon-sm"
+                disabled={pendingId === item.id}
+                onClick={() => saveEdit(item)}
+                className="bg-emerald-ink text-parchment hover:bg-emerald-ink/85"
+              >
+                {pendingId === item.id ? (
+                  <Loader2 className="size-3.5 animate-spin" />
+                ) : (
+                  <Check className="size-3.5" />
+                )}
+              </Button>
+              <Button
+                type="button"
+                size="icon-sm"
+                variant="outline"
+                onClick={() => setEditingId(null)}
+              >
+                <X className="size-3.5" />
+              </Button>
+            </div>
+          ) : (
+            <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/60 via-transparent to-transparent p-2 opacity-0 transition-opacity group-hover:opacity-100">
+              <p className="line-clamp-1 text-xs font-medium text-white">
+                {item.title}
+              </p>
+            </div>
+          )}
+
+          {editingId !== item.id && (
+            <div className="absolute top-1.5 right-1.5 flex gap-1">
+              <Button
+                type="button"
+                size="icon-sm"
+                variant="outline"
+                onClick={() => startEdit(item)}
+                className="bg-card/90 backdrop-blur"
+              >
+                <Pencil className="size-3.5" />
+              </Button>
+              <Button
+                type="button"
+                size="icon-sm"
+                variant="destructive"
+                disabled={pendingId === item.id}
+                onClick={() => handleDelete(item)}
+                className="bg-card/90 backdrop-blur"
+              >
+                {pendingId === item.id ? (
+                  <Loader2 className="size-3.5 animate-spin" />
+                ) : (
+                  <Trash2 className="size-3.5" />
+                )}
+              </Button>
+            </div>
+          )}
         </li>
       ))}
     </ul>

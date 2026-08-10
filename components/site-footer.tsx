@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 
@@ -42,13 +43,14 @@ export function SiteFooter() {
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
           <div>
-            <div className="flex items-center gap-2.5">
-              <span className="flex size-9 items-center justify-center rounded-md bg-amber-spark font-heading text-base font-semibold text-emerald-deep">
-                EA
-              </span>
-              <span className="font-heading text-base font-semibold text-parchment">
-                EARC
-              </span>
+            <div className="flex items-center gap-2.5 rounded-md bg-parchment/95 px-3 py-2 w-fit">
+              <Image
+                src="/earc_logo.png"
+                alt="EARC logo"
+                width={144}
+                height={86}
+                className="h-11 w-auto"
+              />
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-parchment/65">
               Jnana Prabodhini&rsquo;s Educational Activity Research Centre —
