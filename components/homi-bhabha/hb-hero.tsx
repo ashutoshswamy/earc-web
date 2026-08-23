@@ -30,9 +30,14 @@ export function HbHero() {
           </h1>
 
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-parchment/70">
-            Comprehensive Level 1 &amp; Level 2 preparation classes by Jnana
-            Prabodhini&rsquo;s EARC — India&rsquo;s oldest science talent
-            search, guided by mentors who have run it for decades.
+            JPEARC provides structured online and practical guidance for the
+            Dr. Homi Bhabha Balvaidnyanik Spardha, helping students build
+            strong conceptual understanding, intensive practice and
+            confidence for the competition. The programme combines theory,
+            problem-solving and hands-on practical learning, covering
+            concepts from the SSC, CBSE and ICSE syllabi — with practical
+            kits, guided experiments, test-series practice recordings,
+            notes and personalised mentoring for every level of the exam.
           </p>
         </motion.div>
 

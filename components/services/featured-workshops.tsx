@@ -12,27 +12,22 @@ import {
 
 import { Badge } from "@/components/ui/badge";
 
-const modules = [
-  {
-    step: "Module 1",
-    title: "Intro & goal setting",
-    detail: "Framing lifelong learning and setting concrete study goals.",
-  },
-  {
-    step: "Module 2",
-    title: "Reading, listening & writing",
-    detail: "Building the three core intake and output skills together.",
-  },
-  {
-    step: "Module 3",
-    title: "Memory & information processing",
-    detail: "Techniques for retention and organising what's learned.",
-  },
-  {
-    step: "Module 4",
-    title: "Exam preparation",
-    detail: "Applying the full toolkit under real exam conditions.",
-  },
+const studySkillsFeatures = [
+  "6-day structured workshop",
+  "Self-awareness & goal setting",
+  "Study planning and time management",
+  "Reading speed & comprehension",
+  "Note-making, summarisation & concept mapping",
+  "Information processing techniques",
+  "Memory enhancement strategies",
+  "Revision & examination techniques",
+  "Career awareness and guidance",
+];
+
+const studySkillsStats = [
+  { label: "Target group", value: "Std. 10 students" },
+  { label: "Geographical spread", value: "Pune & Raigad" },
+  { label: "Expected reach", value: "1,000+ students" },
 ];
 
 const cpwFeatures = [
@@ -44,7 +39,7 @@ const cpwFeatures = [
 
 export function FeaturedWorkshops() {
   return (
-    <section id="workshops" className="bg-mist">
+    <section id="workshops" className="scroll-mt-24 bg-mist">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
         <div className="ruled-margin max-w-2xl">
           <h2 className="font-heading text-3xl font-semibold text-emerald-deep sm:text-4xl">
@@ -69,39 +64,38 @@ export function FeaturedWorkshops() {
             </div>
 
             <h3 className="mt-5 font-heading text-xl font-semibold text-emerald-deep">
-              Self-Study Skill Workshop
+              Study Skills — Self-Study Skills Development
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              Lifelong learning skills — goal setting, reading, listening,
-              writing, memory techniques, and information processing — built
-              across four modules and closed out with exam preparation.
+              A structured workshop-based programme for Std. 10 students,
+              developing effective and independent learning habits — study
+              planning, reading and comprehension, information processing,
+              memory, revision and exam preparation — combining
+              activity-based learning, practice and reflection so students
+              can apply these strategies in their regular academic routine.
             </p>
 
-            <ol className="mt-6 space-y-0">
-              {modules.map((m, i) => (
-                <li key={m.step} className="relative flex gap-4 pb-6 last:pb-0">
-                  <div className="flex flex-col items-center">
-                    <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-emerald-ink font-mono text-[0.7rem] font-semibold text-parchment">
-                      {i + 1}
-                    </span>
-                    {i < modules.length - 1 && (
-                      <span className="mt-1 w-px flex-1 bg-emerald-ink/15" />
-                    )}
-                  </div>
-                  <div className="pt-0.5">
-                    <p className="text-xs font-semibold tracking-wide text-amber-spark uppercase">
-                      {m.step}
-                    </p>
-                    <p className="font-heading text-[0.95rem] font-semibold text-emerald-deep">
-                      {m.title}
-                    </p>
-                    <p className="mt-0.5 text-sm text-muted-foreground">
-                      {m.detail}
-                    </p>
-                  </div>
+            <ul className="mt-6 space-y-2">
+              {studySkillsFeatures.map((item) => (
+                <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-amber-spark" />
+                  {item}
                 </li>
               ))}
-            </ol>
+            </ul>
+
+            <dl className="mt-6 grid grid-cols-1 gap-2.5 border-t border-emerald-ink/10 pt-4 sm:grid-cols-3">
+              {studySkillsStats.map((stat) => (
+                <div key={stat.label}>
+                  <dt className="text-[0.7rem] tracking-wide text-muted-foreground uppercase">
+                    {stat.label}
+                  </dt>
+                  <dd className="text-sm font-semibold text-emerald-deep">
+                    {stat.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </article>
 
           {/* Compete Prabodhini Way */}

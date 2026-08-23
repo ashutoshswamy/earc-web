@@ -23,7 +23,10 @@ const domains = [
 
 export function AboutHero() {
   return (
-    <section className="relative overflow-hidden border-b border-emerald-ink/10">
+    <section
+      id="about"
+      className="relative scroll-mt-24 overflow-hidden border-b border-emerald-ink/10"
+    >
       <div className="ruled-paper-bg pointer-events-none absolute inset-0 opacity-60" />
       <div className="relative mx-auto max-w-5xl px-4 py-16 sm:px-6 md:py-24 lg:px-8">
         <motion.div

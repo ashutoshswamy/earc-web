@@ -2,7 +2,7 @@ import { Compass, Target } from "lucide-react";
 
 export function MissionVision() {
   return (
-    <section className="bg-mist">
+    <section id="vision-mission" className="scroll-mt-24 bg-mist">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
         <div className="grid gap-5 md:grid-cols-2">
           <article className="rounded-2xl border border-emerald-ink/10 bg-emerald-ink p-8 text-parchment sm:p-10">

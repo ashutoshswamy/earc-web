@@ -3,6 +3,7 @@ import {
   Compass,
   FlaskConical,
   Handshake,
+  Languages,
   Lightbulb,
   type LucideIcon,
   Sprout,
@@ -32,6 +33,13 @@ export interface Project {
   summary: string;
   objectives: string[];
   reach: string;
+  structure?: string;
+  methodology?: string;
+  keyActivities?: string[];
+  enrichmentIntro?: string;
+  enrichmentOpportunities?: string[];
+  implementationAreas?: string;
+  opportunities?: { audience: string; detail: string }[];
 }
 
 export const projects: Project[] = [
@@ -41,13 +49,40 @@ export const projects: Project[] = [
     category: "experiential-learning",
     icon: Sprout,
     summary:
-      "Activity-based experiential learning that builds holistic development around doing, not just listening.",
+      "Anubhav Shala is an educational initiative for children aged 6–11 years living in urban communities of Pune. The programme supports children in accessing primary education while creating opportunities for foundational learning, skill development and holistic growth.",
     objectives: [
-      "Replace rote lessons with hands-on activity stations",
-      "Build social, motor, and thinking skills alongside academics",
-      "Give teachers a repeatable activity-based lesson format",
+      "Strengthen foundational and academic learning",
+      "Develop confidence, creativity and communication skills",
+      "Nurture life skills, values and positive habits",
+      "Encourage participation in school and community activities",
+      "Support the overall development of every child",
     ],
-    reach: "Run across partner schools as a term-long classroom programme.",
+    reach: "Urban communities of Pune, for children aged 6–11 years.",
+    structure:
+      "Target Group: Children aged 6–11 years. Junior Group (Grades 1–3) focuses on foundational learning, language, numeracy, creativity and basic life skills. Senior Group (Grades 4–6) focuses on strengthening academic concepts, communication, problem-solving, creativity and practical life skills.",
+    methodology:
+      "Anubhav Shala follows an experiential and activity-based learning approach. Children learn through activities, games, stories, creative work and real-life experiences. Learning is planned according to their age and learning level, with continuous assessment and individual support.",
+    keyActivities: [
+      "Foundational & Academic Learning",
+      "Language & Mathematics Activities",
+      "Art, Craft & Origami",
+      "Yoga, Sports & Physical Activities",
+      "Storytelling, Music, Dance & Drama",
+      "Worksheets, Projects & Learning Games",
+      "Parent Meetings & Home Visits",
+      "Continuous Assessment & Support",
+    ],
+    enrichmentIntro:
+      "Children get opportunities to explore their interests, express themselves and build confidence through:",
+    enrichmentOpportunities: [
+      "Cultural Celebrations & Special Days",
+      "Recitation, Drawing & Creative Competitions",
+      "Summer Camps",
+      "Educational & Community Visits",
+      "Life Skills Activities",
+      "Exhibitions & Student Presentations",
+      "School & Community Events",
+    ],
   },
   {
     id: "chhote-scientists",
@@ -55,13 +90,78 @@ export const projects: Project[] = [
     category: "experiential-learning",
     icon: FlaskConical,
     summary:
-      "Hands-on science experiments and inquiry-based learning for rural and urban students alike.",
+      "Chhote Scientists is an experiential science learning programme for students from Grades 5 to 9. It encourages children to explore science through observation, questioning, experimentation and problem-solving, making learning engaging and connected to everyday life.",
     objectives: [
-      "Turn science from a textbook subject into a hands-on habit",
-      "Reach both rural and urban classrooms with the same rigour",
-      "Build early scientific temperament before it's specialised away",
+      "Develop scientific thinking and curiosity",
+      "Build skills such as observation, questioning and experimentation",
+      "Connect classroom concepts with real-life experiences",
+      "Encourage learning through hands-on activities and problem-solving",
     ],
-    reach: "One of EARC's largest-reach initiatives, spanning multiple states.",
+    reach: "For students from Grades 5 to 9, across partner schools.",
+    structure:
+      "The programme is designed in two levels: Grades 5–7 focus on developing foundational scientific skills, while Grades 8–9 focus on applying scientific concepts through experiments, problem-solving and projects.",
+    methodology:
+      "Chhote Scientists follows an activity-based, experiential learning approach using hands-on experiments, everyday materials, group activities, models and projects. It is implemented through Teacher Training, Vidnyan Doot (Facilitator) and Volunteer-based models.",
+    keyActivities: [
+      "Science Learning Sessions",
+      "Teacher Training Workshops",
+      "Weekly & Monthly Modules",
+      "Project-based Learning",
+    ],
+    enrichmentOpportunities: [
+      "Science Competitions for selected students — V-Gyan, Skill-Synch & V-Solve",
+      "Residential Science Camps for competition winners",
+    ],
+  },
+  {
+    id: "learneng",
+    title: "LearnEng",
+    category: "experiential-learning",
+    icon: Languages,
+    summary:
+      "LearnEng is an activity-based English-language and life-skills development programme for students in rural government and aided schools. It aims to build confidence in English communication, develop life skills for self-progress and sustainable livelihood, and nurture local youth leadership.",
+    objectives: [
+      "Build confidence in English communication",
+      "Develop essential life skills for personal and future growth",
+      "Create joyful and engaging opportunities to use English",
+      "Nurture local youth as community learning facilitators",
+    ],
+    reach: "Rural government and aided schools, through a Shikshandoot-led model.",
+    structure:
+      "LearnEng is designed for students in rural government and aided schools and is implemented through a Shikshandoot (Community Resource Person)-led model. Regular 60-minute learning sessions are conducted throughout the year.",
+    methodology:
+      "The programme follows an activity-based and experiential approach to English learning. Sessions focus on communication and confidence-building through activities such as role-plays, reading, goal-setting and group-based learning, along with a range of cultural and educational activities.",
+    keyActivities: [
+      "English Language & Communication Sessions",
+      "Life Skills Development",
+      "Reading & Communication Activities",
+      "Summer Learning Camps",
+    ],
+    enrichmentOpportunities: [
+      "Talent Development Workshops for selected students",
+      "Opportunities for Shikshandoots to develop their own communication and leadership skills",
+    ],
+  },
+  {
+    id: "padhai-se-dosti",
+    title: "Padhai Se Dosti",
+    category: "community-outreach",
+    icon: Handshake,
+    summary:
+      "Padhai Se Dosti is a facilitator-led learning support programme for students of Grades 5–7, designed to nurture a passion for learning and build essential study skills among underprivileged and rural students. Through regular, activity-based sessions held close to where children live, it creates a space where they can freely learn, explore and strengthen their foundational abilities.",
+    objectives: [
+      "Nurture a passion for learning and develop essential study skills among underprivileged and rural students",
+      "Create an accessible learning space close to students' homes",
+      "Encourage learning through regular, activity-based engagement",
+    ],
+    reach: "Districts: Dharashiv, Solapur, and Raigad.",
+    structure:
+      "Regular activity-based sessions are conducted for students of Grades 5–7 on study skills.",
+    methodology:
+      "Padhai Se Dosti follows a facilitator-led, activity-based learning approach, while Kendra Samanvayaks provide their support through frequent visits to the centres.",
+    keyActivities: ["Daily Sessions on study skills at centres"],
+    enrichmentOpportunities: ["Summer Camps for participating students"],
+    implementationAreas: "Districts: Dharashiv, Solapur, and Raigad",
   },
   {
     id: "gyan-setu",
@@ -83,13 +183,35 @@ export const projects: Project[] = [
     category: "talent-leadership",
     icon: Award,
     summary:
-      "A nurturance programme that identifies and mentors high-potential and gifted students.",
+      "Pradnya Vikas is a talent development programme of Jnana Prabodhini EARC that works with students from Grades 7 to 10 in communities across Pune. The programme is based on the belief that every individual has the potential for growth, which can be nurtured through meaningful experiences, dedicated mentoring and continuous effort.",
     objectives: [
-      "Identify high-potential students early through structured assessment",
-      "Provide sustained mentorship, not a one-time talent test",
-      "Build a pipeline from identification into leadership opportunity",
+      "Identify students with high potential through scientific assessment",
+      "Motivate students towards continuous self-development",
+      "Nurture physical, mental, social, intellectual and spiritual development",
+      "Provide meaningful mentoring and developmental experiences",
+      "Help students channel their abilities towards excellence in diverse fields",
     ],
-    reach: "Follows identified students over multiple years of mentorship.",
+    reach: "Communities across Pune, for students aged 12–17 in Grades 7–10.",
+    structure:
+      "The programme engages students aged 12–17 years from Grades 7 to 10, providing continuous mentoring and developmental inputs along with academic and study guidance.",
+    methodology:
+      "Pradnya Vikas follows an experiential and learner-centred approach through play-way activities, storytelling, group discussions, hands-on activities and outdoor experiential learning.",
+    keyActivities: [
+      "Academic & Study Skills Development",
+      "Intelligence Enhancement",
+      "Life Skills & Personality Development",
+      "Creative Activities",
+      "Yoga, Sports & Physical Activities",
+      "Projects & Learning Games",
+      "Parent Meetings & Home Visits",
+    ],
+    enrichmentOpportunities: [
+      "Cultural Celebrations & Special Activities",
+      "Creative Competitions",
+      "Summer Camps",
+      "Educational Visits",
+      "Exhibitions & Student Presentations",
+    ],
   },
   {
     id: "vikas-mitra",
@@ -97,13 +219,44 @@ export const projects: Project[] = [
     category: "community-outreach",
     icon: Users,
     summary:
-      "Community leadership and grassroots educational enhancement, built with local volunteers.",
+      "Vikas Mitra is a rural and tribal education initiative of Jnana Prabodhini EARC that works with students from Grades 5 to 10. The programme aims to bridge educational gaps by providing structured, experiential and skill-oriented learning opportunities that develop students' learning abilities, thinking skills, confidence and aspirations. Vikas Mitra goes beyond academic support by helping students learn independently, think critically, solve problems, explore opportunities and connect learning with their local context and everyday experiences.",
     objectives: [
-      "Train local community members as education volunteers",
-      "Strengthen the link between schools and the communities around them",
-      "Sustain enrichment work between EARC's direct visits",
+      "Develop students' learning abilities, curiosity and thinking skills",
+      "Strengthen memory, comprehension, study skills and self-learning",
+      "Nurture critical thinking, creativity, communication and problem-solving",
+      "Build confidence, leadership, collaboration and social responsibility",
+      "Provide exposure to diverse careers, opportunities, ideas and role models",
+      "Connect learning with local contexts, real-life situations and community needs",
+      "Identify and nurture students with higher potential through additional opportunities",
     ],
-    reach: "Grassroots volunteer network embedded in local communities.",
+    reach: "Pune & Raigad Districts | 4 Blocks | 55 Schools | 5,000+ Students | 60+ ShikshanDoots (CRPs)",
+    structure:
+      "The programme engages students from Grades 5 to 10, with age-appropriate learning experiences designed to progressively develop foundational learning skills, thinking abilities, creativity, problem-solving, leadership and future readiness.",
+    methodology:
+      "Vikas Mitra follows an activity-based, experiential and learner-centred approach through games and learning challenges, stories and discussions, experiments and hands-on activities, problem-solving and creative tasks, projects and real-life situations, and local-context-based learning.",
+    keyActivities: [
+      "Learning, Memory & Study Skills",
+      "Critical & Creative Thinking",
+      "Problem-Solving & Decision-Making",
+      "Communication & Collaboration",
+      "Leadership & Self-Awareness",
+      "Digital, Financial & Media Literacy",
+      "Experiential & Project-Based Learning",
+      "Career & Future-Readiness Exposure",
+      "Teacher / Facilitator Development",
+    ],
+    enrichmentOpportunities: [
+      "Advanced workshops for highly able students",
+      "Thinking Skills, Creativity & Design Thinking activities",
+      "Leadership and Rural Innovation opportunities",
+      "Special Camps and Competitions",
+      "Educational Visits and Career Exposure",
+      "Projects, Exhibitions and Student Presentations",
+      "Interaction with experts, institutions and role models",
+      "Community-based and experiential learning opportunities",
+    ],
+    implementationAreas:
+      "Pune & Raigad Districts | 4 Blocks | 55 Schools | 5,000+ Students | 60+ ShikshanDoots (CRPs)",
   },
   {
     id: "vivek-inspire",
@@ -125,13 +278,31 @@ export const projects: Project[] = [
     category: "community-outreach",
     icon: Compass,
     summary:
-      "Motivation and skill-enhancement workshops that meet school students where they are.",
+      "Prerana Setu is a mentoring and interaction platform that connects school students with professionals from diverse fields across India and around the world. JPEARC, in collaboration with Jnana Prabodhini Foundation (USA), creates opportunities for students from rural and urban schools to interact with professionals, explore diverse career possibilities and learn from their personal journeys. Through these interactions, students gain exposure to different career paths, skills, challenges and opportunities, helping them broaden their horizons and set meaningful goals from an early age.",
     objectives: [
       "Run short, focused workshops on motivation and study skills",
       "Reach students outside EARC's flagship exam programmes",
       "Act as an entry point into EARC's deeper initiatives",
     ],
-    reach: "Workshop format, run across schools on a rolling basis.",
+    reach:
+      "In collaboration with Jnana Prabodhini Foundation (USA) — weekly online sessions connecting students across states with professionals worldwide.",
+    keyActivities: [
+      "Weekly 2-hour online interactive sessions",
+      "Students from different states participate together",
+      "Professionals from diverse fields share their journeys, experiences, skills and career opportunities",
+      "Sessions are organised around different themes and areas of interest",
+      "Monthly student presentations provide opportunities for students to reflect, express and share their learning",
+    ],
+    opportunities: [
+      {
+        audience: "For Professionals",
+        detail: "Share your journey, experiences and expertise to inspire the next generation.",
+      },
+      {
+        audience: "For Schools & Students",
+        detail: "Register and participate in interactive sessions with professionals from diverse fields.",
+      },
+    ],
   },
   {
     id: "teachers-training",

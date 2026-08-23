@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 
 import { SiteHeader } from "@/components/site-header";
 import { AboutHero } from "@/components/about/about-hero";
+import { JnanaPrabodhini } from "@/components/about/jnana-prabodhini";
+import { EarcAbout } from "@/components/about/earc-about";
 import { LeadershipTributes } from "@/components/about/leadership-tributes";
 import { TeamGrid } from "@/components/about/team-grid";
 import { Testimonial } from "@/components/about/testimonial";
@@ -22,6 +24,8 @@ export default function AboutPage() {
       <SiteHeader />
       <main className="flex-1">
         <AboutHero />
+        <JnanaPrabodhini />
+        <EarcAbout />
         <LeadershipTributes />
         <TeamGrid />
         <Testimonial />

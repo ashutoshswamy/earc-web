@@ -1,29 +1,48 @@
-import { FlaskConical, ClipboardCheck, Microscope, BookOpen } from "lucide-react";
+import {
+  Video,
+  Languages,
+  FlaskConical,
+  Microscope,
+  ClipboardCheck,
+  UserCheck,
+  Target,
+} from "lucide-react";
 
 const features = [
   {
-    icon: FlaskConical,
-    title: "Practical guidance",
-    description:
-      "Direct hands-on and virtual experiment guidance for Level 2 practicals.",
+    icon: Video,
+    title: "Online conceptual guidance",
+    description: "Live sessions led by subject experts.",
   },
   {
-    icon: ClipboardCheck,
-    title: "Mock test series",
-    description:
-      "Weekly and monthly tests with detailed answer keys and review sessions.",
+    icon: Languages,
+    title: "English & Marathi mediums",
+    description: "Guidance available in both mediums of instruction.",
+  },
+  {
+    icon: FlaskConical,
+    title: "Hands-on practical sessions",
+    description: "Direct practical guidance for Level 2 experiments.",
   },
   {
     icon: Microscope,
-    title: "Project guidance",
-    description:
-      "Mentorship for top performers who qualify for Level 3 projects.",
+    title: "Practical kits",
+    description: "Science experiments and take-home practical kits.",
   },
   {
-    icon: BookOpen,
-    title: "Structured notes",
-    description:
-      "In-depth study material tailored to the exam's syllabus and pattern.",
+    icon: ClipboardCheck,
+    title: "Test series",
+    description: "Monthly tests and mock papers to track readiness.",
+  },
+  {
+    icon: UserCheck,
+    title: "Personalised mentoring",
+    description: "One-on-one guidance through the preparation journey.",
+  },
+  {
+    icon: Target,
+    title: "Exam-oriented preparation",
+    description: "Practice and pacing built around the exam pattern.",
   },
 ];
 
@@ -35,7 +54,7 @@ export function HbFeatures() {
           What every batch includes
         </h2>
 
-        <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature) => (
             <div key={feature.title} className="ruled-margin">
               <feature.icon className="size-6 text-emerald-ink" />

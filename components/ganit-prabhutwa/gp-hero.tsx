@@ -33,8 +33,14 @@ export function GpHero() {
           </h1>
 
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Nurturing mathematical aptitude, logical thinking, and
-            problem-solving excellence in school students.
+            JPEARC, in collaboration with the Pune Jilha Ganit Adhyapak
+            Mandal, conducts Ganit Prabhutwa — a mathematics proficiency
+            examination assessing conceptual understanding, mathematical
+            thinking and the ability to represent mathematical ideas beyond
+            rote learning. It encourages students to approach mathematics
+            through inquisitiveness, experimentation and practical
+            application, with a focus on depth of understanding rather than
+            speed and memorisation.
           </p>
         </motion.div>
 

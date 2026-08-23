@@ -43,7 +43,7 @@ const team = [
 
 export function TeamGrid() {
   return (
-    <section className="bg-parchment">
+    <section id="team" className="scroll-mt-24 bg-parchment">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
         <div className="ruled-margin max-w-2xl">
           <h2 className="font-heading text-3xl font-semibold text-emerald-deep sm:text-4xl">

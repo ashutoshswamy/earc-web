@@ -3,6 +3,7 @@ import { Suspense } from "react";
 
 import { SiteHeader } from "@/components/site-header";
 import { GpHero } from "@/components/ganit-prabhutwa/gp-hero";
+import { GpFeatures } from "@/components/ganit-prabhutwa/gp-features";
 import { GpTabs } from "@/components/ganit-prabhutwa/gp-tabs";
 import { GpCtaBanner } from "@/components/ganit-prabhutwa/gp-cta-banner";
 import { SiteFooter } from "@/components/site-footer";
@@ -20,6 +21,7 @@ export default function GanitPrabhutwaPage() {
       <SiteHeader />
       <main className="flex-1">
         <GpHero />
+        <GpFeatures />
         <section id="resource-hub" className="bg-parchment scroll-mt-16">
           <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
             <Suspense>
