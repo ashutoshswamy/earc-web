@@ -1,4 +1,7 @@
--- Run once in the Supabase SQL editor for your project.
+-- Complete schema for the EARC site. Run in the Supabase SQL editor.
+-- Idempotent: safe to re-run — every policy is dropped and recreated, and
+-- tables/buckets use "if not exists". To wipe everything first, run
+-- scripts/supabase-reset.sql.
 
 -- 1. profiles ---------------------------------------------------------
 create table if not exists public.profiles (
@@ -9,6 +12,7 @@ create table if not exists public.profiles (
 
 alter table public.profiles enable row level security;
 
+drop policy if exists "read own profile" on public.profiles;
 create policy "read own profile"
   on public.profiles for select
   using (auth.uid() = id);
@@ -50,10 +54,12 @@ create table if not exists public.gallery_items (
 
 alter table public.gallery_items enable row level security;
 
+drop policy if exists "public read gallery" on public.gallery_items;
 create policy "public read gallery"
   on public.gallery_items for select
   using (true);
 
+drop policy if exists "admins write gallery" on public.gallery_items;
 create policy "admins write gallery"
   on public.gallery_items for all
   using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'))
@@ -72,16 +78,18 @@ create table if not exists public.annual_reports (
 
 alter table public.annual_reports enable row level security;
 
+drop policy if exists "public read reports" on public.annual_reports;
 create policy "public read reports"
   on public.annual_reports for select
   using (true);
 
+drop policy if exists "admins write reports" on public.annual_reports;
 create policy "admins write reports"
   on public.annual_reports for all
   using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'))
   with check (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
 
--- 3b. gp_papers (Ganit Prabhutwa Pariksha papers) ----------------------
+-- 4. gp_papers (Ganit Prabhutwa Pariksha papers) ----------------------
 create table if not exists public.gp_papers (
   id uuid primary key default gen_random_uuid(),
   title text not null,
@@ -96,16 +104,18 @@ create table if not exists public.gp_papers (
 
 alter table public.gp_papers enable row level security;
 
+drop policy if exists "public read gp_papers" on public.gp_papers;
 create policy "public read gp_papers"
   on public.gp_papers for select
   using (true);
 
+drop policy if exists "admins write gp_papers" on public.gp_papers;
 create policy "admins write gp_papers"
   on public.gp_papers for all
   using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'))
   with check (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
 
--- 4. storage buckets -----------------------------------------------------
+-- 5. storage buckets ---------------------------------------------------
 insert into storage.buckets (id, name, public)
 values ('gallery', 'gallery', true)
 on conflict (id) do nothing;
@@ -118,28 +128,34 @@ insert into storage.buckets (id, name, public)
 values ('gp-papers', 'gp-papers', true)
 on conflict (id) do nothing;
 
+drop policy if exists "public read gallery bucket" on storage.objects;
 create policy "public read gallery bucket"
   on storage.objects for select
   using (bucket_id = 'gallery');
 
+drop policy if exists "admins write gallery bucket" on storage.objects;
 create policy "admins write gallery bucket"
   on storage.objects for all
   using (bucket_id = 'gallery' and exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'))
   with check (bucket_id = 'gallery' and exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
 
+drop policy if exists "public read reports bucket" on storage.objects;
 create policy "public read reports bucket"
   on storage.objects for select
   using (bucket_id = 'reports');
 
+drop policy if exists "admins write reports bucket" on storage.objects;
 create policy "admins write reports bucket"
   on storage.objects for all
   using (bucket_id = 'reports' and exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'))
   with check (bucket_id = 'reports' and exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
 
+drop policy if exists "public read gp-papers bucket" on storage.objects;
 create policy "public read gp-papers bucket"
   on storage.objects for select
   using (bucket_id = 'gp-papers');
 
+drop policy if exists "admins write gp-papers bucket" on storage.objects;
 create policy "admins write gp-papers bucket"
   on storage.objects for all
   using (bucket_id = 'gp-papers' and exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'))

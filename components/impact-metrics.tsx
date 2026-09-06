@@ -11,6 +11,18 @@ const metrics = [
   { icon: GraduationCap, value: 211000, suffix: "+", label: "Students" },
 ];
 
+// ponytail: Indian short form — "6.4K", "21K", "2.11L". Want words
+// ("Lakh")? swap the "L"/"K" literals below.
+function formatIndian(n: number) {
+  if (n < 1000) return String(n);
+  if (n < 100000) {
+    const k = n / 1000;
+    return `${Number.isInteger(k) ? k : k.toFixed(1)}K`;
+  }
+  const l = n / 100000;
+  return `${Number.isInteger(l) ? l : l.toFixed(l < 10 ? 2 : 1)}L`;
+}
+
 function Counter({ value, suffix }: { value: number; suffix: string }) {
   const ref = React.useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
@@ -24,7 +36,7 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 
   React.useEffect(() => {
     return spring.on("change", (latest) => {
-      setDisplay(Math.round(latest).toLocaleString("en-IN"));
+      setDisplay(formatIndian(Math.round(latest)));
     });
   }, [spring]);
 
