@@ -4,7 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, FileText, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -60,16 +60,6 @@ export function HeroSection() {
             >
               Explore Projects
               <ArrowRight className="size-4" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              nativeButton={false}
-              render={<Link href="/annual-report" />}
-              className="h-11 gap-2 border-emerald-ink/25 px-5 text-emerald-deep hover:bg-mist"
-            >
-              <FileText className="size-4" />
-              View Annual Report
             </Button>
           </div>
         </motion.div>

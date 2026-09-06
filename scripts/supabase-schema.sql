@@ -81,6 +81,30 @@ create policy "admins write reports"
   using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'))
   with check (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
 
+-- 3b. gp_papers (Ganit Prabhutwa Pariksha papers) ----------------------
+create table if not exists public.gp_papers (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  year int not null,
+  standard text not null check (standard in ('5th', '8th')),
+  kind text not null check (kind in ('question-paper', 'answer-sheet')),
+  storage_path text not null,
+  url text not null,
+  created_at timestamptz not null default now(),
+  created_by uuid references auth.users (id)
+);
+
+alter table public.gp_papers enable row level security;
+
+create policy "public read gp_papers"
+  on public.gp_papers for select
+  using (true);
+
+create policy "admins write gp_papers"
+  on public.gp_papers for all
+  using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'))
+  with check (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
+
 -- 4. storage buckets -----------------------------------------------------
 insert into storage.buckets (id, name, public)
 values ('gallery', 'gallery', true)
@@ -88,6 +112,10 @@ on conflict (id) do nothing;
 
 insert into storage.buckets (id, name, public)
 values ('reports', 'reports', true)
+on conflict (id) do nothing;
+
+insert into storage.buckets (id, name, public)
+values ('gp-papers', 'gp-papers', true)
 on conflict (id) do nothing;
 
 create policy "public read gallery bucket"
@@ -107,3 +135,12 @@ create policy "admins write reports bucket"
   on storage.objects for all
   using (bucket_id = 'reports' and exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'))
   with check (bucket_id = 'reports' and exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
+
+create policy "public read gp-papers bucket"
+  on storage.objects for select
+  using (bucket_id = 'gp-papers');
+
+create policy "admins write gp-papers bucket"
+  on storage.objects for all
+  using (bucket_id = 'gp-papers' and exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'))
+  with check (bucket_id = 'gp-papers' and exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));

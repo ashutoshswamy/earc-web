@@ -164,3 +164,97 @@ export async function deleteAnnualReport(id: string, storagePath: string) {
   revalidatePath("/admin");
   return { error: null };
 }
+
+const GP_STANDARDS = ["5th", "8th"] as const;
+const GP_KINDS = ["question-paper", "answer-sheet"] as const;
+
+export async function uploadGpPaper(formData: FormData) {
+  const profile = await requireAdmin();
+  const supabase = await createClient();
+
+  const title = String(formData.get("title") ?? "").trim();
+  const year = Number(formData.get("year"));
+  const standard = String(formData.get("standard") ?? "");
+  const kind = String(formData.get("kind") ?? "");
+  const file = formData.get("file") as File | null;
+
+  if (!title || !year || !file || file.size === 0) {
+    return { error: "Title, year, and file are required." };
+  }
+  if (!GP_STANDARDS.includes(standard as (typeof GP_STANDARDS)[number])) {
+    return { error: "Standard must be 5th or 8th." };
+  }
+  if (!GP_KINDS.includes(kind as (typeof GP_KINDS)[number])) {
+    return { error: "Kind must be a question paper or answer sheet." };
+  }
+  if (file.type !== "application/pdf") {
+    return { error: "Papers must be a PDF." };
+  }
+  if (file.size > MAX_FILE_BYTES) {
+    return { error: "File is larger than 50MB." };
+  }
+
+  const path = `${profile.id}/${Date.now()}-${slugify(file.name)}`;
+
+  const { error: uploadError } = await supabase.storage
+    .from("gp-papers")
+    .upload(path, file, { contentType: file.type });
+  if (uploadError) return { error: uploadError.message };
+
+  const {
+    data: { publicUrl },
+  } = supabase.storage.from("gp-papers").getPublicUrl(path);
+
+  const { error: insertError } = await supabase.from("gp_papers").insert({
+    title,
+    year,
+    standard,
+    kind,
+    storage_path: path,
+    url: publicUrl,
+    created_by: profile.id,
+  });
+  if (insertError) {
+    await supabase.storage.from("gp-papers").remove([path]);
+    return { error: insertError.message };
+  }
+
+  revalidatePath("/ganit-prabhutwa-pariksha");
+  revalidatePath("/admin");
+  return { error: null };
+}
+
+export async function updateGpPaper(
+  id: string,
+  title: string,
+  year: number,
+) {
+  await requireAdmin();
+  const supabase = await createClient();
+
+  const trimmed = title.trim();
+  if (!trimmed || !year) return { error: "Title and year are required." };
+
+  const { error } = await supabase
+    .from("gp_papers")
+    .update({ title: trimmed, year })
+    .eq("id", id);
+  if (error) return { error: error.message };
+
+  revalidatePath("/ganit-prabhutwa-pariksha");
+  revalidatePath("/admin");
+  return { error: null };
+}
+
+export async function deleteGpPaper(id: string, storagePath: string) {
+  await requireAdmin();
+  const supabase = await createClient();
+
+  await supabase.storage.from("gp-papers").remove([storagePath]);
+  const { error } = await supabase.from("gp_papers").delete().eq("id", id);
+  if (error) return { error: error.message };
+
+  revalidatePath("/ganit-prabhutwa-pariksha");
+  revalidatePath("/admin");
+  return { error: null };
+}

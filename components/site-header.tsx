@@ -48,15 +48,13 @@ const navGroups: NavGroup[] = [
     ],
   },
   {
-    title: "Programs",
+    title: "Our Major Projects",
     items: [
-      { title: "Chhote Scientists", href: "/projects#chhote-scientists" },
-      { title: "LearnEng", href: "/projects#learneng" },
-      { title: "Gyan-Setu", href: "/projects#gyan-setu" },
-      { title: "Pradnya Vikas", href: "/projects#pradnya-vikas" },
-      { title: "Padhai Se Dosti", href: "/projects#padhai-se-dosti" },
-      { title: "Vikas Mitra", href: "/projects#vikas-mitra" },
-      { title: "Anubhav Shala", href: "/projects#anubhav-shala" },
+      { title: "All Projects", href: "/projects", description: "Every EARC initiative in one place." },
+      { title: "Subject Specific", href: "/projects#chhote-scientists", description: "Chhote Scientists, LearnEng." },
+      { title: "Personality Development", href: "/projects#anubhav-shala", description: "Anubhav Shala, Pradnya Vikas, Padhai Se Dosti, Vikas Mitra." },
+      { title: "Community & Outreach", href: "/projects#gyan-setu", description: "Gyan Setu, Prerana Setu." },
+      { title: "Past Projects", href: "/projects#vivek-inspire", description: "Vivek Inspire." },
     ],
   },
   {
@@ -64,22 +62,22 @@ const navGroups: NavGroup[] = [
     items: [
       { title: "Prerana Setu", href: "/projects#prerana-setu" },
       { title: "Self Study Skill Workshops", href: "/services#workshops" },
-      { title: "Teacher's Training", href: "/projects#teachers-training" },
+      { title: "Teachers' Training", href: "/projects#teachers-training" },
+      { title: "Trainers' Training for Non-Formal Education", href: "/services#trainers-training", description: "Building the facilitators who run EARC's non-formal programmes." },
     ],
   },
   {
-    title: "Exams & Services",
+    title: "Competitive Exam",
     items: [
       { title: "Homi Bhabha", href: "/homi-bhabha", description: "Balvaidnyanik Spardha — India's oldest science talent search for students." },
       { title: "Ganit Prabhutwa Pariksha", href: "/ganit-prabhutwa-pariksha", description: "A mathematics aptitude examination sharpening problem-solving from an early age." },
-      { title: "Self Study Skill Workshops", href: "/services#workshops" },
     ],
   },
   {
     title: "Resources",
     items: [
       { title: "Learning Resources", href: "/resources#learning-resources" },
-      { title: "Reports", href: "/resources#reports", description: "Project-wise reports." },
+      { title: "Reports", href: "/resources#reports", description: "Coming soon." },
     ],
   },
   {
@@ -87,6 +85,7 @@ const navGroups: NavGroup[] = [
     items: [
       { title: "Dashboard", href: "/impact#dashboard" },
       { title: "Reach & Outcomes", href: "/impact#reach-outcomes" },
+      { title: "Testimonials", href: "/impact#testimonials" },
       { title: "Success Stories", href: "/impact#stories" },
     ],
   },
@@ -95,7 +94,6 @@ const navGroups: NavGroup[] = [
 const primaryLinks: NavLink[] = [
   { title: "Home", href: "/" },
   { title: "Gallery", href: "/gallery" },
-  { title: "Annual Reports", href: "/annual-report" },
   { title: "Contact Us", href: "/contact" },
 ];
 
@@ -104,15 +102,15 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-emerald-ink/10 bg-parchment/70 backdrop-blur-lg backdrop-saturate-150 supports-[backdrop-filter]:bg-parchment/60">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2.5 shrink-0">
           <Image
             src="/earc_logo.png"
             alt="EARC logo"
-            width={144}
-            height={86}
+            width={192}
+            height={115}
             priority
-            className="h-11 w-auto"
+            className="h-14 w-auto sm:h-16"
           />
         </Link>
 

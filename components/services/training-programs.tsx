@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BookOpenCheck, Compass, Lightbulb } from "lucide-react";
+import { ArrowRight, BookOpenCheck, Compass, Lightbulb, Users } from "lucide-react";
 
 const programs = [
   {
@@ -26,23 +26,32 @@ const programs = [
     cta: "Learn more",
     href: "/about",
   },
+  {
+    icon: Users,
+    title: "Trainers' Training for Non-Formal Education",
+    focus:
+      "Building the field facilitators — Shikshandoots, Vidnyan Doots and Kendra Samanvayaks — who run EARC's non-formal programmes: content, activity-based pedagogy, session planning, mentoring and community engagement.",
+    cta: "Inquire for training",
+    href: "/contact",
+  },
 ];
 
 export function TrainingPrograms() {
   return (
-    <section className="bg-parchment">
+    <section id="trainers-training" className="scroll-mt-20 bg-parchment">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
         <div className="ruled-margin max-w-2xl">
           <h2 className="font-heading text-3xl font-semibold text-emerald-deep sm:text-4xl">
-            Teachers&rsquo; training programmes
+            Teachers&rsquo; &amp; trainers&rsquo; training programmes
           </h2>
           <p className="mt-2 text-muted-foreground">
-            Three tracks that take an educator from curriculum to classroom
-            to school-wide leadership.
+            Tracks that take an educator from curriculum to classroom to
+            school-wide leadership — plus training for non-formal education
+            facilitators.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {programs.map((program) => (
             <article
               key={program.title}

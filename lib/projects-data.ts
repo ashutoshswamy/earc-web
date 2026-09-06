@@ -12,17 +12,19 @@ import {
 } from "lucide-react";
 
 export type ProjectCategory =
-  | "experiential-learning"
-  | "talent-leadership"
+  | "subject-specific"
+  | "personality-development"
   | "community-outreach"
-  | "teacher-empowerment";
+  | "teacher-empowerment"
+  | "past-projects";
 
 export const categories: { id: ProjectCategory | "all"; label: string }[] = [
-  { id: "all", label: "All projects" },
-  { id: "experiential-learning", label: "Experiential learning" },
-  { id: "talent-leadership", label: "Talent & leadership" },
-  { id: "community-outreach", label: "Community & outreach" },
-  { id: "teacher-empowerment", label: "Teacher empowerment" },
+  { id: "all", label: "All Projects" },
+  { id: "subject-specific", label: "Subject Specific" },
+  { id: "personality-development", label: "Personality Development" },
+  { id: "community-outreach", label: "Community & Outreach" },
+  { id: "teacher-empowerment", label: "Teacher Empowerment" },
+  { id: "past-projects", label: "Past Projects" },
 ];
 
 export interface Project {
@@ -30,6 +32,9 @@ export interface Project {
   title: string;
   category: ProjectCategory;
   icon: LucideIcon;
+  // ponytail: drop a logo file in /public and set its path here to show it
+  // instead of the lucide icon; icon stays the fallback.
+  logo?: string;
   summary: string;
   objectives: string[];
   reach: string;
@@ -46,7 +51,7 @@ export const projects: Project[] = [
   {
     id: "anubhav-shala",
     title: "Anubhav Shala",
-    category: "experiential-learning",
+    category: "personality-development",
     icon: Sprout,
     summary:
       "Anubhav Shala is an educational initiative for children aged 6–11 years living in urban communities of Pune. The programme supports children in accessing primary education while creating opportunities for foundational learning, skill development and holistic growth.",
@@ -87,7 +92,7 @@ export const projects: Project[] = [
   {
     id: "chhote-scientists",
     title: "Chhote Scientists",
-    category: "experiential-learning",
+    category: "subject-specific",
     icon: FlaskConical,
     summary:
       "Chhote Scientists is an experiential science learning programme for students from Grades 5 to 9. It encourages children to explore science through observation, questioning, experimentation and problem-solving, making learning engaging and connected to everyday life.",
@@ -116,7 +121,7 @@ export const projects: Project[] = [
   {
     id: "learneng",
     title: "LearnEng",
-    category: "experiential-learning",
+    category: "subject-specific",
     icon: Languages,
     summary:
       "LearnEng is an activity-based English-language and life-skills development programme for students in rural government and aided schools. It aims to build confidence in English communication, develop life skills for self-progress and sustainable livelihood, and nurture local youth leadership.",
@@ -145,7 +150,7 @@ export const projects: Project[] = [
   {
     id: "padhai-se-dosti",
     title: "Padhai Se Dosti",
-    category: "community-outreach",
+    category: "personality-development",
     icon: Handshake,
     summary:
       "Padhai Se Dosti is a facilitator-led learning support programme for students of Grades 5–7, designed to nurture a passion for learning and build essential study skills among underprivileged and rural students. Through regular, activity-based sessions held close to where children live, it creates a space where they can freely learn, explore and strengthen their foundational abilities.",
@@ -180,7 +185,7 @@ export const projects: Project[] = [
   {
     id: "pradnya-vikas",
     title: "Pradnya Vikas",
-    category: "talent-leadership",
+    category: "personality-development",
     icon: Award,
     summary:
       "Pradnya Vikas is a talent development programme of Jnana Prabodhini EARC that works with students from Grades 7 to 10 in communities across Pune. The programme is based on the belief that every individual has the potential for growth, which can be nurtured through meaningful experiences, dedicated mentoring and continuous effort.",
@@ -216,7 +221,7 @@ export const projects: Project[] = [
   {
     id: "vikas-mitra",
     title: "Vikas Mitra",
-    category: "community-outreach",
+    category: "personality-development",
     icon: Users,
     summary:
       "Vikas Mitra is a rural and tribal education initiative of Jnana Prabodhini EARC that works with students from Grades 5 to 10. The programme aims to bridge educational gaps by providing structured, experiential and skill-oriented learning opportunities that develop students' learning abilities, thinking skills, confidence and aspirations. Vikas Mitra goes beyond academic support by helping students learn independently, think critically, solve problems, explore opportunities and connect learning with their local context and everyday experiences.",
@@ -261,7 +266,7 @@ export const projects: Project[] = [
   {
     id: "vivek-inspire",
     title: "Vivek Inspire",
-    category: "talent-leadership",
+    category: "past-projects",
     icon: Target,
     summary:
       "Comprehensive mentorship and competitive-exam guidance for students aiming at scholarship-level exams.",

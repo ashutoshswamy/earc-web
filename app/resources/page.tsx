@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { BookOpen, FileStack } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { FloatingContact } from "@/components/floating-contact";
-import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Resources — EARC",
@@ -58,24 +56,12 @@ export default function ResourcesPage() {
               Reports
             </h2>
             <p className="mt-2 text-muted-foreground">
-              Project-wise reports are published alongside EARC&rsquo;s
-              annual reports.
+              Project-wise reports from across EARC&rsquo;s programmes.
             </p>
           </div>
-          <div className="mt-10 flex flex-col items-center gap-4 rounded-2xl border border-emerald-ink/10 bg-card p-10 text-center shadow-sm">
-            <span className="flex size-11 items-center justify-center rounded-xl bg-mist text-emerald-ink">
-              <FileStack className="size-5.5" strokeWidth={1.75} />
-            </span>
-            <p className="max-w-md text-muted-foreground">
-              Browse EARC&rsquo;s published, downloadable reports.
-            </p>
-            <Button
-              nativeButton={false}
-              render={<Link href="/annual-report" />}
-              className="bg-emerald-ink text-parchment hover:bg-emerald-ink/90"
-            >
-              View annual reports
-            </Button>
+          <div className="mt-10 flex flex-col items-center gap-3 rounded-2xl border border-dashed border-emerald-ink/20 py-20 text-center">
+            <FileStack className="size-8 text-muted-foreground" strokeWidth={1.5} />
+            <p className="text-muted-foreground">Coming soon.</p>
           </div>
         </section>
       </main>

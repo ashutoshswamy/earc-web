@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowLeft, MapPin } from "lucide-react";
 
@@ -56,8 +57,18 @@ export default async function ProjectDetailPage({
             </Link>
 
             <div className="mt-6 flex items-center gap-4">
-              <span className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-mist text-emerald-ink">
-                <project.icon className="size-7" strokeWidth={1.75} />
+              <span className="flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-mist text-emerald-ink">
+                {project.logo ? (
+                  <Image
+                    src={project.logo}
+                    alt={`${project.title} logo`}
+                    width={56}
+                    height={56}
+                    className="size-full object-contain p-2"
+                  />
+                ) : (
+                  <project.icon className="size-7" strokeWidth={1.75} />
+                )}
               </span>
               <div>
                 <Badge variant="secondary" className="bg-mist text-emerald-deep">

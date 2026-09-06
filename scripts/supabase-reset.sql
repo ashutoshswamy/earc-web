@@ -9,7 +9,8 @@ drop function if exists public.handle_new_user();
 
 drop table if exists public.gallery_items cascade;
 drop table if exists public.annual_reports cascade;
+drop table if exists public.gp_papers cascade;
 drop table if exists public.profiles cascade;
 
-delete from storage.objects where bucket_id in ('gallery', 'reports');
-delete from storage.buckets where id in ('gallery', 'reports');
+delete from storage.objects where bucket_id in ('gallery', 'reports', 'gp-papers');
+delete from storage.buckets where id in ('gallery', 'reports', 'gp-papers');

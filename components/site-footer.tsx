@@ -13,11 +13,10 @@ const linkColumns = [
     ],
   },
   {
-    heading: "Exams",
+    heading: "Competitive Exam",
     links: [
       { title: "Homi Bhabha", href: "/homi-bhabha" },
       { title: "Ganit Prabhutwa Pariksha", href: "/ganit-prabhutwa-pariksha" },
-      { title: "Annual Report", href: "/annual-report" },
     ],
   },
   {
@@ -47,9 +46,9 @@ export function SiteFooter() {
               <Image
                 src="/earc_logo.png"
                 alt="EARC logo"
-                width={144}
-                height={86}
-                className="h-11 w-auto"
+                width={192}
+                height={115}
+                className="h-14 w-auto"
               />
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-parchment/65">

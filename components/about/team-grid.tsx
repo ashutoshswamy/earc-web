@@ -1,47 +1,46 @@
 "use client";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import * as React from "react";
+
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-function initials(name: string) {
-  return name
-    .split(" ")
-    .map((w) => w[0])
-    .join("")
-    .slice(0, 2);
-}
+// ponytail: seed roster — client to supply real Role / Centre / Project per
+// member (first names are all that was provided). Add or edit rows here; the
+// project dropdown is built from the distinct `project` values below.
+type Member = {
+  name: string;
+  role: string;
+  centre: string;
+  project: string;
+};
 
-const team = [
-  {
-    name: "Omkar Banait",
-    role: "Programme Coordinator",
-    bio: "Works closely with schools to plan and run EARC's exam and teacher-training programmes on the ground.",
-  },
-  {
-    name: "Prakash Rananavre",
-    role: "Programme Coordinator",
-    bio: "Coordinates workshop delivery and school partnerships across the network EARC works with.",
-  },
-  {
-    name: "Purva Dixit-Dhokte",
-    role: "Research Associate",
-    bio: "Contributes to curriculum research and resource development for EARC's teaching materials.",
-  },
-  {
-    name: "Mrinmayee Vaishampayan",
-    role: "Research Associate",
-    bio: "Supports content design and evaluation for EARC's teacher training modules.",
-  },
+const members: Member[] = [
+  { name: "Amar Paranjpe", role: "Projects Head", centre: "—", project: "All Projects" },
+  { name: "Purva", role: "—", centre: "—", project: "Project 1 (rename)" },
+  { name: "Shubhankar", role: "—", centre: "—", project: "Project 1 (rename)" },
+  { name: "Swapnil", role: "—", centre: "—", project: "Project 1 (rename)" },
+  { name: "Rutuja", role: "—", centre: "—", project: "Project 1 (rename)" },
+  { name: "Omkar", role: "—", centre: "—", project: "Project 2 (rename)" },
+  { name: "Prakash", role: "—", centre: "—", project: "Project 2 (rename)" },
+  { name: "Surekha", role: "—", centre: "—", project: "Project 3 (rename)" },
+  { name: "Sayali", role: "—", centre: "—", project: "Project 3 (rename)" },
+  { name: "Anjali", role: "—", centre: "—", project: "Project 3 (rename)" },
 ];
 
+const projects = ["all", ...Array.from(new Set(members.map((m) => m.project)))];
+
 export function TeamGrid() {
+  const [project, setProject] = React.useState("all");
+
+  const rows =
+    project === "all" ? members : members.filter((m) => m.project === project);
+
   return (
     <section id="team" className="scroll-mt-24 bg-parchment">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
@@ -50,55 +49,54 @@ export function TeamGrid() {
             Team
           </h2>
           <p className="mt-2 text-muted-foreground">
-            The coordinators and researchers behind EARC&rsquo;s day-to-day
-            work.
+            The coordinators and facilitators running EARC&rsquo;s projects on
+            the ground.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {team.map((member) => (
-            <Dialog key={member.name}>
-              <DialogTrigger
-                render={
-                  <button
-                    type="button"
-                    className="group flex flex-col items-center rounded-2xl border border-emerald-ink/10 bg-card p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-ink/10"
-                  />
-                }
-              >
-                <Avatar
-                  size="lg"
-                  className="size-16 transition-transform duration-300 group-hover:scale-105"
+        <div className="mt-8 flex flex-wrap items-center gap-3">
+          <Select value={project} onValueChange={(v) => setProject(v ?? "all")}>
+            <SelectTrigger aria-label="Filter team by project" className="w-64">
+              <SelectValue placeholder="Project" />
+            </SelectTrigger>
+            <SelectContent>
+              {projects.map((p) => (
+                <SelectItem key={p} value={p}>
+                  {p === "all" ? "All projects" : p}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="mt-6 overflow-x-auto rounded-2xl border border-emerald-ink/10 bg-card shadow-sm">
+          <table className="w-full min-w-[40rem] text-left text-sm">
+            <thead>
+              <tr className="border-b border-emerald-ink/10 text-xs tracking-wide text-muted-foreground uppercase">
+                <th className="px-4 py-3 font-semibold">Sr. No.</th>
+                <th className="px-4 py-3 font-semibold">Name</th>
+                <th className="px-4 py-3 font-semibold">Role</th>
+                <th className="px-4 py-3 font-semibold">Centre</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((m, i) => (
+                <tr
+                  key={m.name}
+                  className="border-b border-emerald-ink/5 last:border-0"
                 >
-                  <AvatarFallback className="bg-mist font-heading text-base font-semibold text-emerald-ink">
-                    {initials(member.name)}
-                  </AvatarFallback>
-                </Avatar>
-                <h3 className="mt-4 font-heading text-base font-semibold text-emerald-deep">
-                  {member.name}
-                </h3>
-                <p className="mt-0.5 text-xs font-medium tracking-wide text-amber-spark uppercase">
-                  {member.role}
-                </p>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <Avatar size="lg" className="size-14">
-                    <AvatarFallback className="bg-mist font-heading text-base font-semibold text-emerald-ink">
-                      {initials(member.name)}
-                    </AvatarFallback>
-                  </Avatar>
-                  <DialogTitle className="mt-2 text-emerald-deep">
-                    {member.name}
-                  </DialogTitle>
-                  <p className="text-xs font-medium tracking-wide text-amber-spark uppercase">
-                    {member.role}
-                  </p>
-                </DialogHeader>
-                <DialogDescription>{member.bio}</DialogDescription>
-              </DialogContent>
-            </Dialog>
-          ))}
+                  <td className="px-4 py-3 font-mono text-muted-foreground">
+                    {i + 1}
+                  </td>
+                  <td className="px-4 py-3 font-medium text-emerald-deep">
+                    {m.name}
+                  </td>
+                  <td className="px-4 py-3 text-muted-foreground">{m.role}</td>
+                  <td className="px-4 py-3 text-muted-foreground">{m.centre}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </section>

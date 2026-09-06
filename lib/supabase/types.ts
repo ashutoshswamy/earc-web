@@ -25,3 +25,15 @@ export interface AnnualReport {
   created_at: string;
   created_by: string | null;
 }
+
+export interface GpPaper {
+  id: string;
+  title: string;
+  year: number;
+  standard: "5th" | "8th";
+  kind: "question-paper" | "answer-sheet";
+  storage_path: string;
+  url: string;
+  created_at: string;
+  created_by: string | null;
+}

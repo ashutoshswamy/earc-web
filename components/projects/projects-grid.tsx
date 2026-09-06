@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
@@ -41,8 +42,18 @@ export function ProjectsGrid() {
                 className="group flex h-full w-full flex-col rounded-2xl border border-emerald-ink/10 bg-card p-6 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-ink/10"
               >
                 <div className="flex items-center justify-between">
-                  <span className="flex size-11 items-center justify-center rounded-xl bg-mist text-emerald-ink transition-colors duration-300 group-hover:bg-amber-spark/15">
-                    <project.icon className="size-5.5" strokeWidth={1.75} />
+                  <span className="flex size-11 items-center justify-center overflow-hidden rounded-xl bg-mist text-emerald-ink transition-colors duration-300 group-hover:bg-amber-spark/15">
+                    {project.logo ? (
+                      <Image
+                        src={project.logo}
+                        alt={`${project.title} logo`}
+                        width={44}
+                        height={44}
+                        className="size-full object-contain p-1.5"
+                      />
+                    ) : (
+                      <project.icon className="size-5.5" strokeWidth={1.75} />
+                    )}
                   </span>
                   <Badge variant="secondary" className="bg-mist text-emerald-deep">
                     {categoryLabel(project.category)}
