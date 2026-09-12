@@ -3,7 +3,6 @@ import { BookOpen, FileStack } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { FloatingContact } from "@/components/floating-contact";
 
 export const metadata: Metadata = {
   title: "Resources — EARC",
@@ -66,7 +65,6 @@ export default function ResourcesPage() {
         </section>
       </main>
       <SiteFooter />
-      <FloatingContact />
     </div>
   );
 }

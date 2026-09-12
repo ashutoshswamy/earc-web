@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Phone, Check } from "lucide-react";
+import { Check } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -18,9 +18,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-  DialogFooter,
 } from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { HbRegistrationForm } from "@/components/homi-bhabha/hb-registration-form";
 
 type Phase = {
   label: string;
@@ -83,13 +83,15 @@ const courses: Course[] = [
     medium: "Marathi",
     mode: "Online — Level 1 & 2",
     phases: [
-      { label: "Phase 1", window: "End Apr – end May", timing: "Daily, 4:30–6:00 PM" },
-      { label: "Phase 2", window: "September onwards", timing: "Tue & Thu, 5:30–7:00 PM" },
+      { label: "Phase 1", window: "13 Apr – end May", timing: "Daily, 4:30–6:00 PM" },
+      { label: "Phase 2", window: "June onwards", timing: "Wed & Fri, 4:30–6:00 PM" },
     ],
+    fee: "₹14,160 (incl. GST)",
     highlights: [
-      "Notes & practice sets",
-      "Sub-topic guidance",
-      "Direct practicals guidance",
+      "Lesson notes & practice question sets",
+      "Science sub-topic guidance",
+      "Weekly test series",
+      "Practicals guidance",
       "Project guidance for selected students",
     ],
     contact: { name: "EARC Office" },
@@ -138,10 +140,10 @@ export function HbCourses() {
             <Card key={course.id} className="ring-emerald-ink/10">
               <CardHeader>
                 <div className="flex flex-wrap items-center gap-1.5">
-                  <Badge className="bg-emerald-ink text-parchment">
+                  <Badge className="bg-emerald-ink px-3 py-1 text-sm font-bold text-parchment">
                     Std. {course.std}th
                   </Badge>
-                  <Badge variant="outline" className="border-amber-spark/40 text-emerald-deep">
+                  <Badge className="bg-amber-spark px-3 py-1 text-sm font-bold text-emerald-deep">
                     {course.medium} Medium
                   </Badge>
                 </div>
@@ -192,33 +194,23 @@ export function HbCourses() {
       </div>
 
       <Dialog open={!!active} onOpenChange={(open) => !open && setActive(null)}>
-        <DialogContent>
+        <DialogContent className="sm:max-w-2xl">
           <DialogHeader>
             <DialogTitle>
               Register — Std. {active?.std}th {active?.medium} Medium
             </DialogTitle>
             <DialogDescription>
-              Seats are confirmed by phone before payment. Call or WhatsApp{" "}
-              {active?.contact.name} to reserve a spot for this batch.
+              नोंदणी फॉर्म (Registration form) — payment आधी पूर्ण करून खालील
+              माहिती भरा.
             </DialogDescription>
           </DialogHeader>
-          {active?.contact.phone && (
-            <a
-              href={`tel:${active.contact.phone}`}
-              className="flex items-center gap-2 rounded-lg bg-mist px-4 py-3 font-mono text-sm font-semibold text-emerald-ink"
-            >
-              <Phone className="size-4" />
-              {active.contact.phone}
-            </a>
+          {active && (
+            <HbRegistrationForm
+              courseId={active.id}
+              medium={active.medium}
+              onDone={() => setActive(null)}
+            />
           )}
-          <DialogFooter showCloseButton>
-            <Button nativeButton={false}
-              render={<a href="/contact" />}
-              className="bg-emerald-ink text-parchment hover:bg-emerald-ink/85"
-            >
-              Contact EARC Office
-            </Button>
-          </DialogFooter>
         </DialogContent>
       </Dialog>
     </section>

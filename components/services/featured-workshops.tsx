@@ -1,14 +1,4 @@
-import {
-  BarChart3,
-  BookMarked,
-  Brain,
-  CheckCircle2,
-  ClipboardList,
-  ListChecks,
-  School,
-  Smartphone,
-  Target,
-} from "lucide-react";
+import { BookMarked, Brain, CheckCircle2, School } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 
@@ -30,13 +20,6 @@ const studySkillsStats = [
   { label: "Expected reach", value: "1,000+ students" },
 ];
 
-const cpwFeatures = [
-  { icon: ListChecks, label: "Chapterwise tests" },
-  { icon: ClipboardList, label: "Mock tests" },
-  { icon: CheckCircle2, label: "Answer hints" },
-  { icon: BarChart3, label: "Automated performance analysis" },
-];
-
 export function FeaturedWorkshops() {
   return (
     <section id="workshops" className="scroll-mt-24 bg-mist">
@@ -46,12 +29,11 @@ export function FeaturedWorkshops() {
             Featured workshops
           </h2>
           <p className="mt-2 text-muted-foreground">
-            Two flagship programmes, built for how students actually study
-            and compete.
+            A flagship programme, built for how students actually study.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-5 lg:grid-cols-2">
+        <div className="mt-10">
           {/* Self-Study Skill Workshop */}
           <article className="rounded-2xl border border-emerald-ink/10 bg-card p-6 shadow-sm sm:p-8">
             <div className="flex items-start justify-between gap-3">
@@ -96,42 +78,6 @@ export function FeaturedWorkshops() {
                 </div>
               ))}
             </dl>
-          </article>
-
-          {/* Compete Prabodhini Way */}
-          <article className="rounded-2xl border border-emerald-ink/10 bg-card p-6 shadow-sm sm:p-8">
-            <div className="flex items-start justify-between gap-3">
-              <span className="flex size-11 items-center justify-center rounded-xl bg-mist text-emerald-ink">
-                <Target className="size-5.5" strokeWidth={1.75} />
-              </span>
-              <Badge className="gap-1 bg-amber-spark/15 text-emerald-deep">
-                <Smartphone className="size-3" />
-                Mobile & Web App Integrated
-              </Badge>
-            </div>
-
-            <h3 className="mt-5 font-heading text-xl font-semibold text-emerald-deep">
-              Compete Prabodhini Way
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              Blended guidance for competitive exams — Homi Bhabha, NMMS,
-              Primary and Pre-Secondary Scholarships, and NTSE — through an
-              app-integrated practice cycle.
-            </p>
-
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              {cpwFeatures.map((f) => (
-                <div
-                  key={f.label}
-                  className="flex items-center gap-2.5 rounded-xl bg-mist p-3.5"
-                >
-                  <f.icon className="size-4.5 shrink-0 text-emerald-ink" strokeWidth={1.75} />
-                  <span className="text-sm font-medium text-emerald-deep">
-                    {f.label}
-                  </span>
-                </div>
-              ))}
-            </div>
           </article>
         </div>
 

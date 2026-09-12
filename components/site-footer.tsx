@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 
+import { YoutubeIcon, FacebookIcon } from "@/components/social-icons";
+
 const linkColumns = [
   {
     heading: "Explore",
@@ -10,13 +12,6 @@ const linkColumns = [
       { title: "Projects", href: "/projects" },
       { title: "Services", href: "/services" },
       { title: "Gallery", href: "/gallery" },
-    ],
-  },
-  {
-    heading: "Competitive Exam",
-    links: [
-      { title: "Homi Bhabha", href: "/homi-bhabha" },
-      { title: "Ganit Prabhutwa Pariksha", href: "/ganit-prabhutwa-pariksha" },
     ],
   },
   {
@@ -30,17 +25,16 @@ const linkColumns = [
 ];
 
 const socials = [
-  { label: "YouTube", href: "https://youtube.com" },
-  { label: "Jnana Prabodhini", href: "https://facebook.com" },
-  { label: "Gyan-Setu", href: "https://facebook.com" },
-  { label: "Chatra Prabodhan", href: "https://facebook.com" },
+  { label: "YouTube", href: "https://youtube.com", icon: YoutubeIcon },
+  { label: "Jnana Prabodhini", href: "https://facebook.com", icon: FacebookIcon },
+  { label: "Gyan-Setu", href: "https://facebook.com", icon: FacebookIcon },
 ];
 
 export function SiteFooter() {
   return (
     <footer className="bg-emerald-deep text-parchment/80">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
+        <div className="grid gap-10 lg:grid-cols-[1.3fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-2.5 rounded-md bg-parchment/95 px-3 py-2 w-fit">
               <Image
@@ -62,7 +56,15 @@ export function SiteFooter() {
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="size-4 shrink-0 text-amber-spark" />
-                +91 20 XXXX XXXX
+                <a href="tel:02024207231" className="hover:text-parchment">
+                  020-24207231
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <Phone className="size-4 shrink-0 text-amber-spark" />
+                <a href="tel:+919022476146" className="hover:text-parchment">
+                  +91 9022476146
+                </a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="size-4 shrink-0 text-amber-spark" />
@@ -104,8 +106,9 @@ export function SiteFooter() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full bg-parchment/10 px-3 py-1.5 text-xs font-medium text-parchment/80 transition-colors hover:bg-amber-spark hover:text-emerald-deep"
+                className="inline-flex items-center gap-1.5 rounded-full bg-parchment/10 px-3 py-1.5 text-xs font-medium text-parchment/80 transition-colors hover:bg-amber-spark hover:text-emerald-deep"
               >
+                <social.icon className="size-3.5" />
                 {social.label}
               </a>
             ))}

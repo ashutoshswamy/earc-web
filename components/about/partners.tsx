@@ -1,53 +1,58 @@
-const partners = [
-  {
-    name: "Jnana Prabodhini",
-    detail: "Parent institution",
-  },
-  {
-    name: "Gyan-Setu",
-    detail: "Digital learning wing",
-  },
-  {
-    name: "Chatra Prabodhan",
-    detail: "Student outreach wing",
-  },
-];
+import Image from "next/image";
 
-export function Partners() {
+import { createClient } from "@/lib/supabase/server";
+import type { Partner } from "@/lib/supabase/types";
+
+export async function Partners() {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("partners")
+    .select("*")
+    .order("created_at", { ascending: false });
+  const partners = (data as Partner[]) ?? [];
+
   return (
     <section id="partners" className="scroll-mt-24 bg-mist">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
         <div className="ruled-margin max-w-2xl">
           <h2 className="font-heading text-3xl font-semibold text-emerald-deep sm:text-4xl">
-            Part of the Jnana Prabodhini family
+            Our Partners
           </h2>
           <p className="mt-2 text-muted-foreground">
-            EARC works alongside these affiliated wings.
+            CSR and institutional collaborations behind EARC&rsquo;s projects.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-3">
-          {partners.map((partner) => (
-            <div
-              key={partner.name}
-              className="flex flex-col items-center rounded-2xl border border-emerald-ink/10 bg-card p-8 text-center shadow-sm"
-            >
-              <span className="flex size-12 items-center justify-center rounded-xl bg-emerald-ink font-heading text-base font-semibold text-parchment">
-                {partner.name
-                  .split(/[\s-]/)
-                  .map((w) => w[0])
-                  .join("")
-                  .slice(0, 2)}
-              </span>
-              <h3 className="mt-4 font-heading text-base font-semibold text-emerald-deep">
-                {partner.name}
-              </h3>
-              <p className="mt-1 text-xs text-muted-foreground">
-                {partner.detail}
-              </p>
-            </div>
-          ))}
-        </div>
+        {partners.length === 0 ? (
+          <p className="mt-10 text-muted-foreground">
+            Partner details are being compiled — check back soon.
+          </p>
+        ) : (
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {partners.map((partner) => (
+              <div
+                key={partner.id}
+                className="flex flex-col items-center rounded-2xl border border-emerald-ink/10 bg-card p-8 text-center shadow-sm"
+              >
+                <div className="relative h-12 w-full">
+                  <Image
+                    src={partner.url}
+                    alt={partner.csr_partner}
+                    fill
+                    sizes="160px"
+                    className="object-contain"
+                  />
+                </div>
+                <h3 className="mt-4 font-heading text-base font-semibold text-emerald-deep">
+                  {partner.csr_partner}
+                </h3>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  {partner.project}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

@@ -4,7 +4,6 @@ import { ImageOff, Video } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { FloatingContact } from "@/components/floating-contact";
 import { createClient } from "@/lib/supabase/server";
 import type { GalleryItem } from "@/lib/supabase/types";
 
@@ -85,7 +84,6 @@ export default async function GalleryPage() {
         </section>
       </main>
       <SiteFooter />
-      <FloatingContact />
     </div>
   );
 }

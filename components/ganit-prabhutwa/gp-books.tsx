@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { BookOpen } from "lucide-react";
+import { BookOpen, Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -40,7 +39,13 @@ export function GpBooks() {
             <span className="font-mono text-sm font-semibold text-emerald-ink">
               {book.price}
             </span>
-            <Button size="sm" variant="outline" nativeButton={false} render={<Link href="/contact" />}>
+            <Button
+              size="sm"
+              variant="outline"
+              nativeButton={false}
+              render={<a href="tel:+919022476146" />}
+            >
+              <Phone className="size-3.5" />
               Inquire
             </Button>
           </div>

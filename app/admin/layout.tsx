@@ -16,8 +16,8 @@ export default async function AdminLayout({
 
   return (
     <div className="flex min-h-full flex-1 flex-col bg-parchment">
-      <header className="border-b border-emerald-ink/10 bg-card">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4 sm:px-6">
+      <header className="sticky top-0 z-40 border-b border-emerald-ink/10 bg-card/95 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
           <Link
             href="/"
             className="font-heading text-sm font-semibold text-emerald-ink"

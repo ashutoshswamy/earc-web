@@ -2,12 +2,12 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Sigma, CalendarDays, Download, Video } from "lucide-react";
+import { Sigma, CalendarDays, Download, BookOpen } from "lucide-react";
 
 const quickActions = [
   { label: "Exam schedule", href: "?tab=exam-info#resource-hub", icon: CalendarDays },
   { label: "Download sample papers", href: "?tab=papers#resource-hub", icon: Download },
-  { label: "Online guidance", href: "?tab=guidance#resource-hub", icon: Video },
+  { label: "Reference books", href: "?tab=books#resource-hub", icon: BookOpen },
 ];
 
 export function GpHero() {

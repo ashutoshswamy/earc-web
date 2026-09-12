@@ -23,8 +23,8 @@ export function ContactHero() {
           </h1>
 
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Have questions about our programmes, teacher training, or
-            initiatives? We&rsquo;d love to hear from you.
+            Want to know more about our programs, teacher training, or
+            initiatives? We would love to interact with you!
           </p>
         </motion.div>
       </div>

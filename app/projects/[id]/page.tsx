@@ -7,7 +7,6 @@ import { ArrowLeft, MapPin } from "lucide-react";
 import { categories, projects, type ProjectCategory } from "@/lib/projects-data";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { FloatingContact } from "@/components/floating-contact";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -140,6 +139,17 @@ export default async function ProjectDetailPage({
               </div>
             )}
 
+            {project.implementationAreas && (
+              <div>
+                <h2 className="font-heading text-xl font-semibold text-emerald-deep">
+                  Implementation Areas
+                </h2>
+                <p className="mt-3 leading-relaxed text-muted-foreground">
+                  {project.implementationAreas}
+                </p>
+              </div>
+            )}
+
             {project.enrichmentOpportunities && (
               <div>
                 <h2 className="font-heading text-xl font-semibold text-emerald-deep">
@@ -200,7 +210,6 @@ export default async function ProjectDetailPage({
         </section>
       </main>
       <SiteFooter />
-      <FloatingContact />
     </div>
   );
 }

@@ -5,7 +5,6 @@ import {
   ClipboardList,
   FileText,
   NotebookPen,
-  Video,
   BookOpen,
   MessageSquareQuote,
 } from "lucide-react";
@@ -14,7 +13,6 @@ import type { GpPaper } from "@/lib/supabase/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { GpExamInfo } from "@/components/ganit-prabhutwa/gp-exam-info";
 import { GpResources, type Resource } from "@/components/ganit-prabhutwa/gp-resources";
-import { GpGuidance } from "@/components/ganit-prabhutwa/gp-guidance";
 import { GpBooks } from "@/components/ganit-prabhutwa/gp-books";
 import { GpTestimonials } from "@/components/ganit-prabhutwa/gp-testimonials";
 
@@ -26,7 +24,6 @@ const tabs = [
   { value: "exam-info", label: "Exam Information", icon: ClipboardList },
   { value: "papers", label: "Old Question Papers", icon: FileText },
   { value: "answers", label: "Model Answer Sheets", icon: NotebookPen },
-  { value: "guidance", label: "Online Guidance", icon: Video },
   { value: "books", label: "Reference Books", icon: BookOpen },
   { value: "testimonials", label: "Testimonials", icon: MessageSquareQuote },
 ] as const;
@@ -70,9 +67,6 @@ export function GpTabs({ papers = [] }: { papers?: GpPaper[] }) {
       </TabsContent>
       <TabsContent value="answers">
         <GpResources resources={answerSheets} />
-      </TabsContent>
-      <TabsContent value="guidance">
-        <GpGuidance />
       </TabsContent>
       <TabsContent value="books">
         <GpBooks />

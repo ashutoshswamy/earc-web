@@ -40,11 +40,11 @@ const navGroups: NavGroup[] = [
   {
     title: "About",
     items: [
-      { title: "EARC", href: "/about#earc", description: "Who we are and how we got started." },
-      { title: "Jnana Prabodhini", href: "/about#jnana-prabodhini", description: "The parent institution EARC is part of." },
-      { title: "Vision & Mission", href: "/#vision-mission" },
-      { title: "Our Team", href: "/about#team", description: "Department level, project heads, and centre coordinators." },
-      { title: "Our Partners", href: "/about#partners", description: "CSR and institutional collaborations." },
+      { title: "Jnana Prabodhini", href: "/about#jnana-prabodhini", description: "Our parent organization." },
+      { title: "EARC", href: "/about#earc", description: "Our story and journey so far." },
+      { title: "Vision & Mission", href: "/#vision-mission", description: "The principles that guide us." },
+      { title: "Our Team", href: "/about#leadership", description: "The people behind the impact." },
+      { title: "Our Partners", href: "/about#partners", description: "Collaborating for change." },
     ],
   },
   {
@@ -53,17 +53,15 @@ const navGroups: NavGroup[] = [
       { title: "All Projects", href: "/projects", description: "Every EARC initiative in one place." },
       { title: "Subject Specific", href: "/projects#chhote-scientists", description: "Chhote Scientists, LearnEng." },
       { title: "Personality Development", href: "/projects#anubhav-shala", description: "Anubhav Shala, Pradnya Vikas, Padhai Se Dosti, Vikas Mitra." },
-      { title: "Community & Outreach", href: "/projects#gyan-setu", description: "Gyan Setu, Prerana Setu." },
+      { title: "Community & Outreach", href: "/projects#gyan-setu", description: "Gyan Setu." },
       { title: "Past Projects", href: "/projects#vivek-inspire", description: "Vivek Inspire." },
     ],
   },
   {
     title: "Activities",
     items: [
-      { title: "Prerana Setu", href: "/projects#prerana-setu" },
       { title: "Self Study Skill Workshops", href: "/services#workshops" },
-      { title: "Teachers' Training", href: "/projects#teachers-training" },
-      { title: "Trainers' Training for Non-Formal Education", href: "/services#trainers-training", description: "Building the facilitators who run EARC's non-formal programmes." },
+      { title: "Teachers' & Trainers' Training", href: "/services#trainers-training", description: "Teachers' Training and Trainers' Training for Non-Formal Education, in one place." },
     ],
   },
   {
@@ -84,7 +82,6 @@ const navGroups: NavGroup[] = [
     title: "Impact",
     items: [
       { title: "Dashboard", href: "/impact#dashboard" },
-      { title: "Reach & Outcomes", href: "/impact#reach-outcomes" },
       { title: "Testimonials", href: "/impact#testimonials" },
       { title: "Success Stories", href: "/impact#stories" },
     ],

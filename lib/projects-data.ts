@@ -1,10 +1,8 @@
 import {
   Award,
-  Compass,
   FlaskConical,
   Handshake,
   Languages,
-  Lightbulb,
   type LucideIcon,
   Sprout,
   Target,
@@ -15,7 +13,6 @@ export type ProjectCategory =
   | "subject-specific"
   | "personality-development"
   | "community-outreach"
-  | "teacher-empowerment"
   | "past-projects";
 
 export const categories: { id: ProjectCategory | "all"; label: string }[] = [
@@ -23,7 +20,6 @@ export const categories: { id: ProjectCategory | "all"; label: string }[] = [
   { id: "subject-specific", label: "Subject Specific" },
   { id: "personality-development", label: "Personality Development" },
   { id: "community-outreach", label: "Community & Outreach" },
-  { id: "teacher-empowerment", label: "Teacher Empowerment" },
   { id: "past-projects", label: "Past Projects" },
 ];
 
@@ -174,13 +170,31 @@ export const projects: Project[] = [
     category: "community-outreach",
     icon: Handshake,
     summary:
-      "An educational bridge connecting urban volunteer educators with rural and tribal schools.",
+      "Gyan-Setu is a volunteer-led educational outreach initiative of the Educational Activity Research Centre (EARC), Jnana Prabodhini, Pune. Initiated in 2013, it connects young volunteers with students and communities across diverse regions of India through experiential education, cultural exchange and national integration.",
     objectives: [
-      "Pair volunteer educators with schools that lack specialist teachers",
-      "Deliver content digitally where in-person reach is limited",
-      "Keep the bridge two-way — volunteers learn from the schools too",
+      "Volunteer Development & Leadership — develop socially aware, responsible and capable young leaders through training and field experience",
+      "National Integration — build meaningful connections between youth and communities across different regions of India",
+      "Experiential Education — enrich students' learning through engaging, activity-based educational experiences",
+      "Mutual Learning — create opportunities for volunteers, students and communities to learn from one another",
     ],
-    reach: "Connects volunteer educators to rural and tribal school networks.",
+    reach:
+      "Volunteer-led programmes across diverse, remote and developmentally challenged regions of India, running since 2013.",
+    structure:
+      "1. Preparation & Training — volunteer selection, orientation, subject training, regional understanding and field planning. 2. Field Implementation — teams travel to selected regions and conduct activity-based educational programmes in schools and communities. 3. Reflection & Sharing — volunteers assess their field experience, reflect on their learning and share experiences for continued development.",
+    methodology:
+      "Activity-based learning through experiments, demonstrations, games and interactive sessions. Volunteer-led education, with volunteers trained before field visits. Learning through field experience by interacting with students, teachers and local communities. Cultural exchange through participation in and understanding of local life and culture. Reflection and assessment to strengthen volunteer learning and improve future programmes.",
+    keyActivities: [
+      "Science and Mathematics workshops",
+      "Know Our Country exhibitions",
+      "Career guidance and orientation",
+      "Student–volunteer interaction",
+      "Community and cultural interaction",
+      "Local surveys and interviews",
+      "Exposure to local life, culture and geography",
+      "Volunteer reflection, assessment and experience sharing",
+    ],
+    implementationAreas:
+      "Assam | Arunachal Pradesh | Meghalaya | Nagaland | Chhattisgarh | Jharkhand | Jammu & Kashmir | Ladakh",
   },
   {
     id: "pradnya-vikas",
@@ -276,51 +290,5 @@ export const projects: Project[] = [
       "Sustain guidance across the full run-up to exam day, not just a workshop",
     ],
     reach: "Structured mentorship track for competitive exam aspirants.",
-  },
-  {
-    id: "prerana-setu",
-    title: "Prerana Setu",
-    category: "community-outreach",
-    icon: Compass,
-    summary:
-      "Prerana Setu is a mentoring and interaction platform that connects school students with professionals from diverse fields across India and around the world. JPEARC, in collaboration with Jnana Prabodhini Foundation (USA), creates opportunities for students from rural and urban schools to interact with professionals, explore diverse career possibilities and learn from their personal journeys. Through these interactions, students gain exposure to different career paths, skills, challenges and opportunities, helping them broaden their horizons and set meaningful goals from an early age.",
-    objectives: [
-      "Run short, focused workshops on motivation and study skills",
-      "Reach students outside EARC's flagship exam programmes",
-      "Act as an entry point into EARC's deeper initiatives",
-    ],
-    reach:
-      "In collaboration with Jnana Prabodhini Foundation (USA) — weekly online sessions connecting students across states with professionals worldwide.",
-    keyActivities: [
-      "Weekly 2-hour online interactive sessions",
-      "Students from different states participate together",
-      "Professionals from diverse fields share their journeys, experiences, skills and career opportunities",
-      "Sessions are organised around different themes and areas of interest",
-      "Monthly student presentations provide opportunities for students to reflect, express and share their learning",
-    ],
-    opportunities: [
-      {
-        audience: "For Professionals",
-        detail: "Share your journey, experiences and expertise to inspire the next generation.",
-      },
-      {
-        audience: "For Schools & Students",
-        detail: "Register and participate in interactive sessions with professionals from diverse fields.",
-      },
-    ],
-  },
-  {
-    id: "teachers-training",
-    title: "Teachers' Training",
-    category: "teacher-empowerment",
-    icon: Lightbulb,
-    summary:
-      "Capacity building and modern pedagogical skill workshops for educators, EARC's founding focus.",
-    objectives: [
-      "Train teachers in activity-based and experiential pedagogy",
-      "Build soft skills — planning, communication, guidance",
-      "Develop teacher leaders who can carry training back into schools",
-    ],
-    reach: "See the full programme on the Services page.",
   },
 ];

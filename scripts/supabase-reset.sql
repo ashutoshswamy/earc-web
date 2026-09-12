@@ -8,11 +8,13 @@
 -- SQL ("Direct deletion from storage tables is not allowed"). Remove the
 -- buckets + their files separately:
 --   Dashboard -> Storage -> open each bucket -> delete bucket
---   (buckets: 'gallery', 'reports', 'gp-papers')
+--   (buckets: 'gallery', 'reports', 'gp-papers', 'partners', 'hb-registrations')
 -- or with the CLI:
 --   supabase storage rm --recursive ss:///gallery
 --   supabase storage rm --recursive ss:///reports
 --   supabase storage rm --recursive ss:///gp-papers
+--   supabase storage rm --recursive ss:///partners
+--   supabase storage rm --recursive ss:///hb-registrations
 
 -- 1. auth trigger + function -----------------------------------------
 drop trigger if exists on_auth_user_created on auth.users;
@@ -26,9 +28,20 @@ drop policy if exists "public read reports bucket" on storage.objects;
 drop policy if exists "admins write reports bucket" on storage.objects;
 drop policy if exists "public read gp-papers bucket" on storage.objects;
 drop policy if exists "admins write gp-papers bucket" on storage.objects;
+drop policy if exists "public read partners bucket" on storage.objects;
+drop policy if exists "admins write partners bucket" on storage.objects;
+drop policy if exists "anyone uploads hb-registrations bucket" on storage.objects;
+drop policy if exists "admins read hb-registrations bucket" on storage.objects;
+drop policy if exists "admins delete hb-registrations bucket" on storage.objects;
 
 -- 3. application tables (cascade drops their own policies) -----------
 drop table if exists public.gallery_items cascade;
 drop table if exists public.annual_reports cascade;
 drop table if exists public.gp_papers cascade;
+drop table if exists public.team_members cascade;
+drop table if exists public.partners cascade;
+drop table if exists public.testimonials cascade;
+drop table if exists public.success_stories cascade;
+drop table if exists public.hb_registrations cascade;
+drop table if exists public.contact_submissions cascade;
 drop table if exists public.profiles cascade;

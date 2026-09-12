@@ -6,7 +6,6 @@ import { ContactInfo } from "@/components/contact/contact-info";
 import { ContactForm } from "@/components/contact/contact-form";
 import { LocationMap } from "@/components/contact/location-map";
 import { SiteFooter } from "@/components/site-footer";
-import { FloatingContact } from "@/components/floating-contact";
 
 export const metadata: Metadata = {
   title: "Contact Us — EARC",
@@ -31,7 +30,6 @@ export default function ContactPage() {
         <LocationMap />
       </main>
       <SiteFooter />
-      <FloatingContact />
     </div>
   );
 }

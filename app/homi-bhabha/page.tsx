@@ -5,9 +5,7 @@ import { HbHero } from "@/components/homi-bhabha/hb-hero";
 import { HbCourses } from "@/components/homi-bhabha/hb-courses";
 import { HbFeatures } from "@/components/homi-bhabha/hb-features";
 import { HbFaq } from "@/components/homi-bhabha/hb-faq";
-import { HbCtaBanner } from "@/components/homi-bhabha/hb-cta-banner";
 import { SiteFooter } from "@/components/site-footer";
-import { FloatingContact } from "@/components/floating-contact";
 
 export const metadata: Metadata = {
   title: "Homi Bhabha Balvaidnyanik Spardha Guidance — EARC",
@@ -24,10 +22,8 @@ export default function HomiBhabhaPage() {
         <HbCourses />
         <HbFeatures />
         <HbFaq />
-        <HbCtaBanner />
       </main>
       <SiteFooter />
-      <FloatingContact />
     </div>
   );
 }

@@ -4,7 +4,6 @@ import { ImpactMetrics } from "@/components/impact-metrics";
 import { FeaturedInitiatives } from "@/components/featured-initiatives";
 import { MissionVision } from "@/components/mission-vision";
 import { SiteFooter } from "@/components/site-footer";
-import { FloatingContact } from "@/components/floating-contact";
 
 export default function Home() {
   return (
@@ -17,7 +16,6 @@ export default function Home() {
         <MissionVision />
       </main>
       <SiteFooter />
-      <FloatingContact />
     </div>
   );
 }

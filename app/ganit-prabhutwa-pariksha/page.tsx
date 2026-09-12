@@ -5,16 +5,14 @@ import { SiteHeader } from "@/components/site-header";
 import { GpHero } from "@/components/ganit-prabhutwa/gp-hero";
 import { GpFeatures } from "@/components/ganit-prabhutwa/gp-features";
 import { GpTabs } from "@/components/ganit-prabhutwa/gp-tabs";
-import { GpCtaBanner } from "@/components/ganit-prabhutwa/gp-cta-banner";
 import { SiteFooter } from "@/components/site-footer";
-import { FloatingContact } from "@/components/floating-contact";
 import { createClient } from "@/lib/supabase/server";
 import type { GpPaper } from "@/lib/supabase/types";
 
 export const metadata: Metadata = {
   title: "Ganit Prabhutwa Pariksha — EARC",
   description:
-    "Exam information, old question papers, model answer sheets, online guidance sessions, reference books, and testimonials for the Ganit Prabhutwa Pariksha — Std. 5th & 8th, by Jnana Prabodhini's EARC.",
+    "Exam information, old question papers, model answer sheets, reference books, and testimonials for the Ganit Prabhutwa Pariksha — Std. 5th & 8th, by Jnana Prabodhini's EARC.",
 };
 
 export default async function GanitPrabhutwaPage() {
@@ -38,10 +36,8 @@ export default async function GanitPrabhutwaPage() {
             </Suspense>
           </div>
         </section>
-        <GpCtaBanner />
       </main>
       <SiteFooter />
-      <FloatingContact />
     </div>
   );
 }

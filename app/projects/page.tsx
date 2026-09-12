@@ -5,12 +5,11 @@ import { ProjectsHero } from "@/components/projects/projects-hero";
 import { ProjectsGrid } from "@/components/projects/projects-grid";
 import { ProjectsCta } from "@/components/projects/projects-cta";
 import { SiteFooter } from "@/components/site-footer";
-import { FloatingContact } from "@/components/floating-contact";
 
 export const metadata: Metadata = {
   title: "Projects — EARC",
   description:
-    "EARC's educational initiatives — Anubhav Shala, Chhote Scientists, Gyan Setu, Pradnya Vikas, Vikas Mitra, Vivek Inspire, Prerana Setu, and Teachers' Training.",
+    "EARC's educational initiatives — Anubhav Shala, Chhote Scientists, Gyan Setu, Pradnya Vikas, Vikas Mitra, Vivek Inspire, and Teachers' Training.",
 };
 
 export default function ProjectsPage() {
@@ -27,7 +26,6 @@ export default function ProjectsPage() {
         <ProjectsCta />
       </main>
       <SiteFooter />
-      <FloatingContact />
     </div>
   );
 }

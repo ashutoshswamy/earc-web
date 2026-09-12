@@ -3,7 +3,6 @@ import { Download, FileText, FileX2 } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { FloatingContact } from "@/components/floating-contact";
 import { createClient } from "@/lib/supabase/server";
 import type { AnnualReport } from "@/lib/supabase/types";
 
@@ -74,7 +73,6 @@ export default async function AnnualReportPage() {
         </section>
       </main>
       <SiteFooter />
-      <FloatingContact />
     </div>
   );
 }

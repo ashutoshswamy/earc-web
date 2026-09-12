@@ -10,7 +10,6 @@ import { Testimonial } from "@/components/about/testimonial";
 import { Partners } from "@/components/about/partners";
 import { AboutCta } from "@/components/about/about-cta";
 import { SiteFooter } from "@/components/site-footer";
-import { FloatingContact } from "@/components/floating-contact";
 
 export const metadata: Metadata = {
   title: "About Us — EARC",
@@ -33,7 +32,6 @@ export default function AboutPage() {
         <AboutCta />
       </main>
       <SiteFooter />
-      <FloatingContact />
     </div>
   );
 }

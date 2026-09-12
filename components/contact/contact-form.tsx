@@ -7,6 +7,7 @@ import { z } from "zod";
 import { toast } from "sonner";
 import { Loader2, Send } from "lucide-react";
 
+import { submitContactMessage } from "@/app/admin/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -55,8 +56,21 @@ export function ContactForm() {
     },
   });
 
-  async function onSubmit() {
-    await new Promise((resolve) => setTimeout(resolve, 900));
+  async function onSubmit(values: ContactValues) {
+    const formData = new FormData();
+    formData.set("firstName", values.firstName);
+    formData.set("lastName", values.lastName);
+    formData.set("email", values.email);
+    const subjectLabel =
+      subjects.find((s) => s.value === values.subject)?.label ?? values.subject;
+    formData.set("subject", subjectLabel);
+    formData.set("message", values.message);
+
+    const result = await submitContactMessage(formData);
+    if (result.error) {
+      toast.error("Couldn't send", { description: result.error });
+      return;
+    }
     toast.success("Message sent", {
       description: "We'll get back to you within a day.",
     });
