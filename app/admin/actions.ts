@@ -4,8 +4,8 @@ import { revalidatePath } from "next/cache";
 
 import { requireAdmin } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
+import { MAX_UPLOAD_BYTES, TOO_LARGE_MESSAGE } from "@/lib/upload-limit";
 
-const MAX_FILE_BYTES = 50 * 1024 * 1024;
 
 function slugify(name: string) {
   return name
@@ -24,8 +24,8 @@ export async function uploadGalleryItem(formData: FormData) {
   if (!title || !file || file.size === 0) {
     return { error: "Title and file are required." };
   }
-  if (file.size > MAX_FILE_BYTES) {
-    return { error: "File is larger than 50MB." };
+  if (file.size > MAX_UPLOAD_BYTES) {
+    return { error: TOO_LARGE_MESSAGE };
   }
 
   const mediaType = file.type.startsWith("video/") ? "video" : "photo";
@@ -102,8 +102,8 @@ export async function uploadAnnualReport(formData: FormData) {
   if (file.type !== "application/pdf") {
     return { error: "Annual reports must be a PDF." };
   }
-  if (file.size > MAX_FILE_BYTES) {
-    return { error: "File is larger than 50MB." };
+  if (file.size > MAX_UPLOAD_BYTES) {
+    return { error: TOO_LARGE_MESSAGE };
   }
 
   const path = `${profile.id}/${Date.now()}-${slugify(file.name)}`;
@@ -190,8 +190,8 @@ export async function uploadGpPaper(formData: FormData) {
   if (file.type !== "application/pdf") {
     return { error: "Papers must be a PDF." };
   }
-  if (file.size > MAX_FILE_BYTES) {
-    return { error: "File is larger than 50MB." };
+  if (file.size > MAX_UPLOAD_BYTES) {
+    return { error: TOO_LARGE_MESSAGE };
   }
 
   const path = `${profile.id}/${Date.now()}-${slugify(file.name)}`;
@@ -266,7 +266,7 @@ export async function addTeamMember(formData: FormData) {
   const name = String(formData.get("name") ?? "").trim();
   const designation = String(formData.get("designation") ?? "").trim();
   const project = String(formData.get("project") ?? "").trim();
-  const centre = String(formData.get("centre") ?? "").trim() || "—";
+  const centre = String(formData.get("centre") ?? "").trim() || "-";
 
   if (!name || !designation || !project) {
     return { error: "Name, designation, and project are required." };
@@ -309,7 +309,7 @@ export async function updateTeamMember(
       name: trimmedName,
       designation: trimmedDesignation,
       project: trimmedProject,
-      centre: centre.trim() || "—",
+      centre: centre.trim() || "-",
     })
     .eq("id", id);
   if (error) return { error: error.message };
@@ -331,6 +331,38 @@ export async function deleteTeamMember(id: string) {
   return { error: null };
 }
 
+export async function addLeader(formData: FormData) {
+  const profile = await requireAdmin();
+  const supabase = await createClient();
+
+  const name = String(formData.get("name") ?? "").trim();
+  const role = String(formData.get("role") ?? "").trim();
+  const project = String(formData.get("project") ?? "").trim();
+
+  if (!name) return { error: "Name is required." };
+
+  const { error } = await supabase
+    .from("leaders")
+    .insert({ name, role, project, created_by: profile.id });
+  if (error) return { error: error.message };
+
+  revalidatePath("/about");
+  revalidatePath("/admin");
+  return { error: null };
+}
+
+export async function deleteLeader(id: string) {
+  await requireAdmin();
+  const supabase = await createClient();
+
+  const { error } = await supabase.from("leaders").delete().eq("id", id);
+  if (error) return { error: error.message };
+
+  revalidatePath("/about");
+  revalidatePath("/admin");
+  return { error: null };
+}
+
 export async function uploadPartner(formData: FormData) {
   const profile = await requireAdmin();
   const supabase = await createClient();
@@ -345,8 +377,8 @@ export async function uploadPartner(formData: FormData) {
   if (!file.type.startsWith("image/")) {
     return { error: "Logo must be an image." };
   }
-  if (file.size > MAX_FILE_BYTES) {
-    return { error: "File is larger than 50MB." };
+  if (file.size > MAX_UPLOAD_BYTES) {
+    return { error: TOO_LARGE_MESSAGE };
   }
 
   const path = `${profile.id}/${Date.now()}-${slugify(file.name)}`;
@@ -428,11 +460,17 @@ export async function submitTestimonial(formData: FormData) {
   if (quote.length > 1000) {
     return { error: "Keep the testimonial under 1000 characters." };
   }
+  if (name.length > 200 || detail.length > 200) {
+    return { error: "Name and detail must be under 200 characters." };
+  }
 
   const { error } = await supabase
     .from("testimonials")
     .insert({ quote, name, detail, status: "pending" });
-  if (error) return { error: error.message };
+  if (error) {
+    console.error("testimonial insert", error);
+    return { error: PUBLIC_ERROR };
+  }
 
   revalidatePath("/admin");
   return { error: null };
@@ -586,6 +624,10 @@ function requiredField(formData: FormData, key: string) {
   return String(formData.get(key) ?? "").trim();
 }
 
+// Public forms: never echo raw DB/storage errors to anonymous visitors.
+const PUBLIC_ERROR = "Something went wrong. Please try again later.";
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export async function submitHbRegistration(formData: FormData) {
   const supabase = await createClient();
 
@@ -622,6 +664,12 @@ export async function submitHbRegistration(formData: FormData) {
     if (key === "student_name_en_middle") continue;
     if (!value) return { error: "Please fill in every field." };
   }
+  if (Object.values(fields).some((v) => v.length > 500) || courseId.length > 100) {
+    return { error: "One of the fields is too long." };
+  }
+  if (!EMAIL_RE.test(fields.email)) {
+    return { error: "Enter a valid email address." };
+  }
   if (!HB_MEDIUMS.includes(fields.medium_chosen as (typeof HB_MEDIUMS)[number])) {
     return { error: "Invalid medium." };
   }
@@ -637,8 +685,8 @@ export async function submitHbRegistration(formData: FormData) {
   if (!file.type.startsWith("image/")) {
     return { error: "Payment screenshot must be an image." };
   }
-  if (file.size > MAX_FILE_BYTES) {
-    return { error: "File is larger than 50MB." };
+  if (file.size > MAX_UPLOAD_BYTES) {
+    return { error: TOO_LARGE_MESSAGE };
   }
 
   const path = `${Date.now()}-${slugify(file.name)}`;
@@ -646,7 +694,10 @@ export async function submitHbRegistration(formData: FormData) {
   const { error: uploadError } = await supabase.storage
     .from("hb-registrations")
     .upload(path, file, { contentType: file.type });
-  if (uploadError) return { error: uploadError.message };
+  if (uploadError) {
+    console.error("hb upload", uploadError);
+    return { error: PUBLIC_ERROR };
+  }
 
   const { error: insertError } = await supabase.from("hb_registrations").insert({
     course_id: courseId,
@@ -655,7 +706,8 @@ export async function submitHbRegistration(formData: FormData) {
   });
   if (insertError) {
     await supabase.storage.from("hb-registrations").remove([path]);
-    return { error: insertError.message };
+    console.error("hb insert", insertError);
+    return { error: PUBLIC_ERROR };
   }
 
   revalidatePath("/admin");
@@ -689,6 +741,15 @@ export async function submitContactMessage(formData: FormData) {
   if (!firstName || !lastName || !email || !subject || !message) {
     return { error: "Please fill in every field." };
   }
+  if (
+    [firstName, lastName, email, subject].some((v) => v.length > 200) ||
+    message.length > 5000
+  ) {
+    return { error: "One of the fields is too long." };
+  }
+  if (!EMAIL_RE.test(email)) {
+    return { error: "Enter a valid email address." };
+  }
 
   const { error } = await supabase.from("contact_submissions").insert({
     first_name: firstName,
@@ -697,7 +758,10 @@ export async function submitContactMessage(formData: FormData) {
     subject,
     message,
   });
-  if (error) return { error: error.message };
+  if (error) {
+    console.error("contact insert", error);
+    return { error: PUBLIC_ERROR };
+  }
 
   revalidatePath("/admin");
   return { error: null };

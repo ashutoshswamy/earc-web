@@ -4,7 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -36,18 +36,13 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <span className="ruled-margin inline-flex items-center gap-1.5 text-xs font-semibold tracking-wide text-emerald-deep uppercase">
-            <Sparkles className="size-3.5 text-amber-spark" />
-            Man making Education
-          </span>
-
-          <h1 className="mt-5 font-heading text-4xl leading-[1.08] font-semibold text-emerald-deep sm:text-5xl lg:text-[3.4rem]">
+          <h1 className="font-heading text-4xl leading-[1.08] font-semibold text-emerald-deep sm:text-5xl lg:text-[3.4rem]">
             Jnana Prabodhini&rsquo;s Educational
             <br className="hidden sm:block" /> Activity Research Centre
           </h1>
 
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            Man making for Nation Building — motivating and nurturing
+            Man making for Nation Building - motivating and nurturing
             intelligence for social change, one classroom at a time.
           </p>
 

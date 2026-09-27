@@ -6,7 +6,6 @@ const socials = [
   { label: "YouTube", href: "https://youtube.com", icon: YoutubeIcon },
   { label: "Jnana Prabodhini", href: "https://facebook.com", icon: FacebookIcon },
   { label: "Gyan-Setu", href: "https://facebook.com", icon: FacebookIcon },
-  { label: "Chatra Prabodhan", href: "https://facebook.com", icon: FacebookIcon },
 ];
 
 export function ContactInfo() {

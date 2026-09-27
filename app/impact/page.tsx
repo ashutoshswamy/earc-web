@@ -7,7 +7,7 @@ import { TestimonialsSection } from "@/components/impact/testimonials-section";
 import { SuccessStoriesSection } from "@/components/impact/success-stories-section";
 
 export const metadata: Metadata = {
-  title: "Impact — EARC",
+  title: "Impact - EARC",
   description: "EARC's reach, outcomes, testimonials, and success stories.",
 };
 

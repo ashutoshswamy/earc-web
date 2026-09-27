@@ -8,6 +8,7 @@ import {
   Mail,
   MessageSquareQuote,
   NotebookText,
+  UserRoundCog,
   Users,
 } from "lucide-react";
 
@@ -21,6 +22,7 @@ import { GpPaperUploadForm } from "@/components/admin/gp-paper-upload-form";
 import { GpPaperList } from "@/components/admin/gp-paper-list";
 import { TeamMemberForm } from "@/components/admin/team-member-form";
 import { TeamMemberList } from "@/components/admin/team-member-list";
+import { LeaderAdmin } from "@/components/admin/leader-admin";
 import { PartnerUploadForm } from "@/components/admin/partner-upload-form";
 import { PartnerList } from "@/components/admin/partner-list";
 import { TestimonialList } from "@/components/admin/testimonial-list";
@@ -34,6 +36,7 @@ import type {
   GalleryItem,
   GpPaper,
   HbRegistration,
+  Leader,
   Partner,
   SuccessStory,
   TeamMember,
@@ -41,7 +44,7 @@ import type {
 } from "@/lib/supabase/types";
 
 export const metadata: Metadata = {
-  title: "Admin — EARC",
+  title: "Admin - EARC",
 };
 
 function UploadCard({ children }: { children: React.ReactNode }) {
@@ -60,6 +63,7 @@ export default async function AdminPage() {
     { data: reports },
     { data: gpPapers },
     { data: teamMembers },
+    { data: leaderRows },
     { data: partners },
     { data: testimonials },
     { data: successStories },
@@ -82,6 +86,10 @@ export default async function AdminPage() {
       .from("team_members")
       .select("*")
       .order("created_at", { ascending: false }),
+    supabase
+      .from("leaders")
+      .select("*")
+      .order("created_at", { ascending: true }),
     supabase
       .from("partners")
       .select("*")
@@ -108,6 +116,7 @@ export default async function AdminPage() {
   const annualReports = (reports as AnnualReport[]) ?? [];
   const papers = (gpPapers as GpPaper[]) ?? [];
   const team = (teamMembers as TeamMember[]) ?? [];
+  const leaders = (leaderRows as Leader[]) ?? [];
   const partnerList = (partners as Partner[]) ?? [];
   const testimonialList = (testimonials as Testimonial[]) ?? [];
   const stories = (successStories as SuccessStory[]) ?? [];
@@ -160,6 +169,14 @@ export default async function AdminPage() {
           <GpPaperList items={papers} />
         </div>
       ),
+    },
+    {
+      id: "leadership",
+      label: "Leadership",
+      description: "People shown under About → Leadership. The top two are fixed.",
+      icon: <UserRoundCog className="size-4 shrink-0" strokeWidth={1.75} />,
+      badge: leaders.length,
+      content: <LeaderAdmin items={leaders} />,
     },
     {
       id: "team",

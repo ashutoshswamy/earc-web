@@ -25,6 +25,7 @@ const subjects = [
   { value: "homi-bhabha", label: "Homi Bhabha" },
   { value: "ganit-prabhutwa", label: "Ganit Prabhutwa Pariksha" },
   { value: "school-enrichment", label: "School enrichment programme" },
+  { value: "all-projects", label: "All projects" },
   { value: "other", label: "Something else" },
 ];
 

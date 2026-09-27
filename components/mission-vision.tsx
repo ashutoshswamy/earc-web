@@ -11,7 +11,7 @@ export function MissionVision() {
               Mission
             </h3>
             <p className="mt-3 max-w-md text-[1.05rem] leading-relaxed text-parchment/85">
-              Man making for Nation Building — shaping capable, grounded
+              Man making for Nation Building - shaping capable, grounded
               individuals whose growth strengthens the communities and the
               country around them.
             </p>
@@ -23,7 +23,7 @@ export function MissionVision() {
               Vision
             </h3>
             <p className="mt-3 max-w-md text-[1.05rem] leading-relaxed text-muted-foreground">
-              Motivating and nurturing intelligence for social change —
+              Motivating and nurturing intelligence for social change -
               turning every classroom into a starting point for wider
               impact.
             </p>

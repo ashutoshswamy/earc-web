@@ -28,7 +28,7 @@ export async function SuccessStoriesSection() {
           <div className="mt-10 flex flex-col items-center gap-3 rounded-2xl border border-dashed border-emerald-ink/20 bg-card py-20 text-center">
             <MessageSquareQuote className="size-8 text-muted-foreground" strokeWidth={1.5} />
             <p className="text-muted-foreground">
-              Stories are being collected — check back soon.
+              Stories are being collected - check back soon.
             </p>
           </div>
         ) : (

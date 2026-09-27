@@ -44,7 +44,7 @@ const courses: Course[] = [
     id: "std6-english",
     std: "6",
     medium: "English",
-    mode: "Online — Level 1 & 2",
+    mode: "Online - Level 1 & 2",
     phases: [
       { label: "Phase 1", window: "13 Apr – end May", timing: "Daily, 4:30–6:00 PM" },
       { label: "Phase 2", window: "June onwards", timing: "Wed & Fri, 4:30–6:00 PM" },
@@ -63,7 +63,7 @@ const courses: Course[] = [
     id: "std9-english",
     std: "9",
     medium: "English",
-    mode: "Online — Level 1 & 2",
+    mode: "Online - Level 1 & 2",
     phases: [
       { label: "Phase 1", window: "20 Apr – 30 May", timing: "Daily" },
       { label: "Phase 2", window: "June – October", timing: "Mon, Wed & Fri" },
@@ -81,7 +81,7 @@ const courses: Course[] = [
     id: "std6-marathi",
     std: "6",
     medium: "Marathi",
-    mode: "Online — Level 1 & 2",
+    mode: "Online - Level 1 & 2",
     phases: [
       { label: "Phase 1", window: "13 Apr – end May", timing: "Daily, 4:30–6:00 PM" },
       { label: "Phase 2", window: "June onwards", timing: "Wed & Fri, 4:30–6:00 PM" },
@@ -197,10 +197,10 @@ export function HbCourses() {
         <DialogContent className="sm:max-w-2xl">
           <DialogHeader>
             <DialogTitle>
-              Register — Std. {active?.std}th {active?.medium} Medium
+              Register - Std. {active?.std}th {active?.medium} Medium
             </DialogTitle>
             <DialogDescription>
-              नोंदणी फॉर्म (Registration form) — payment आधी पूर्ण करून खालील
+              नोंदणी फॉर्म (Registration form) - payment आधी पूर्ण करून खालील
               माहिती भरा.
             </DialogDescription>
           </DialogHeader>

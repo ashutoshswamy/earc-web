@@ -46,7 +46,7 @@ export function GalleryList({ items }: { items: GalleryItem[] }) {
   if (items.length === 0) {
     return (
       <p className="text-sm text-muted-foreground">
-        Nothing uploaded yet — add a photo or video above.
+        Nothing uploaded yet - add a photo or video above.
       </p>
     );
   }

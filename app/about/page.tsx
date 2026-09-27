@@ -12,9 +12,9 @@ import { AboutCta } from "@/components/about/about-cta";
 import { SiteFooter } from "@/components/site-footer";
 
 export const metadata: Metadata = {
-  title: "About Us — EARC",
+  title: "About Us - EARC",
   description:
-    "Jnana Prabodhini's Educational Activity Research Centre — our story, leadership, team, and partners.",
+    "Jnana Prabodhini's Educational Activity Research Centre - our story, leadership, team, and partners.",
 };
 
 export default function AboutPage() {

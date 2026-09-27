@@ -8,9 +8,9 @@ import { HbFaq } from "@/components/homi-bhabha/hb-faq";
 import { SiteFooter } from "@/components/site-footer";
 
 export const metadata: Metadata = {
-  title: "Homi Bhabha Balvaidnyanik Spardha Guidance — EARC",
+  title: "Homi Bhabha Balvaidnyanik Spardha Guidance - EARC",
   description:
-    "Level 1 & 2 guidance classes for the Dr. Homi Bhabha Balvaidnyanik Competition — Std. 6th & 9th, English and Marathi medium, online batches by Jnana Prabodhini's EARC.",
+    "Level 1 & 2 guidance classes for the Dr. Homi Bhabha Balvaidnyanik Competition - Std. 6th & 9th, English and Marathi medium, online batches by Jnana Prabodhini's EARC.",
 };
 
 export default function HomiBhabhaPage() {

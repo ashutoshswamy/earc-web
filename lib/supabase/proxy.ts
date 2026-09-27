@@ -25,7 +25,7 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  // touching the session refreshes it if expired — required for
+  // touching the session refreshes it if expired - required for
   // server components to see a valid session on the next request.
   await supabase.auth.getUser();
 

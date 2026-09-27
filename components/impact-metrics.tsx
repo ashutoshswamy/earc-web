@@ -11,7 +11,7 @@ const metrics = [
   { icon: GraduationCap, value: 211000, suffix: "+", label: "Students" },
 ];
 
-// ponytail: Indian short form — "6.4K", "21K", "2.11L". Want words
+// ponytail: Indian short form - "6.4K", "21K", "2.11L". Want words
 // ("Lakh")? swap the "L"/"K" literals below.
 function formatIndian(n: number) {
   if (n < 1000) return String(n);

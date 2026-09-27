@@ -46,13 +46,13 @@ export function FeaturedWorkshops() {
             </div>
 
             <h3 className="mt-5 font-heading text-xl font-semibold text-emerald-deep">
-              Study Skills — Self-Study Skills Development
+              Study Skills - Self-Study Skills Development
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               A structured workshop-based programme for Std. 10 students,
-              developing effective and independent learning habits — study
+              developing effective and independent learning habits - study
               planning, reading and comprehension, information processing,
-              memory, revision and exam preparation — combining
+              memory, revision and exam preparation - combining
               activity-based learning, practice and reflection so students
               can apply these strategies in their regular academic routine.
             </p>
@@ -81,7 +81,7 @@ export function FeaturedWorkshops() {
           </article>
         </div>
 
-        {/* School Enrichment Program — full-width banner */}
+        {/* School Enrichment Program - full-width banner */}
         <div className="mt-5 flex flex-col items-start gap-5 rounded-2xl bg-emerald-ink p-8 text-parchment sm:flex-row sm:items-center sm:justify-between sm:p-10">
           <div className="flex items-start gap-4">
             <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-parchment/10">
@@ -94,7 +94,7 @@ export function FeaturedWorkshops() {
               <p className="mt-1.5 max-w-xl text-sm leading-relaxed text-parchment/75">
                 Improving teaching-learning efficiency school-wide, by
                 adopting Jnana Prabodhini&rsquo;s innovative practices across
-                the whole institution — not just individual classrooms.
+                the whole institution - not just individual classrooms.
               </p>
             </div>
           </div>

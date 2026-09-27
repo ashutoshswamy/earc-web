@@ -8,7 +8,7 @@ import { LocationMap } from "@/components/contact/location-map";
 import { SiteFooter } from "@/components/site-footer";
 
 export const metadata: Metadata = {
-  title: "Contact Us — EARC",
+  title: "Contact Us - EARC",
   description:
     "Reach EARC for questions about programmes, teacher training, or initiatives.",
 };

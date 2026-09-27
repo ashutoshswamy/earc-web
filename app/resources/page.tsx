@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
 export const metadata: Metadata = {
-  title: "Resources — EARC",
+  title: "Resources - EARC",
   description: "Learning resources and project-wise reports from EARC.",
 };
 
@@ -41,7 +41,7 @@ export default function ResourcesPage() {
           <div className="mt-10 flex flex-col items-center gap-3 rounded-2xl border border-dashed border-emerald-ink/20 py-20 text-center">
             <BookOpen className="size-8 text-muted-foreground" strokeWidth={1.5} />
             <p className="text-muted-foreground">
-              Resource index is being assembled — check back soon.
+              Resource index is being assembled - check back soon.
             </p>
           </div>
         </section>

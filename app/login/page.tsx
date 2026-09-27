@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { LoginForm } from "@/components/auth/login-form";
 
 export const metadata: Metadata = {
-  title: "Log in — EARC",
+  title: "Log in - EARC",
 };
 
 export default function LoginPage() {

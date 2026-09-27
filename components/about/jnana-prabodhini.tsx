@@ -28,7 +28,7 @@ export function JnanaPrabodhini() {
           </p>
           <p>
             This is complemented by the principle of &ldquo;Man Making for
-            Nation Building&rdquo;—the belief that developing capable,
+            Nation Building&rdquo;-the belief that developing capable,
             responsible and socially committed individuals contributes to
             the development of society and the nation. Today, JP&rsquo;s
             educational work reaches diverse communities through its formal

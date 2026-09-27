@@ -7,7 +7,7 @@ import { createClient } from "@/lib/supabase/server";
 import type { AnnualReport } from "@/lib/supabase/types";
 
 export const metadata: Metadata = {
-  title: "Annual Report — EARC",
+  title: "Annual Report - EARC",
   description: "EARC's published annual reports.",
 };
 
@@ -40,7 +40,7 @@ export default async function AnnualReportPage() {
             <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-emerald-ink/20 py-20 text-center">
               <FileX2 className="size-8 text-muted-foreground" strokeWidth={1.5} />
               <p className="text-muted-foreground">
-                No reports published yet — check back soon.
+                No reports published yet - check back soon.
               </p>
             </div>
           ) : (

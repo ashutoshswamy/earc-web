@@ -4,12 +4,12 @@ import { Button } from "@/components/ui/button";
 
 const books = [
   {
-    title: "Ganit Prabhutwa Sarav — Std. 5th",
+    title: "Ganit Prabhutwa Sarav - Std. 5th",
     summary: "Chapter-wise practice sets aligned to the Std. 5th exam pattern.",
     price: "₹180",
   },
   {
-    title: "Ganit Prabhutwa Sarav — Std. 8th",
+    title: "Ganit Prabhutwa Sarav - Std. 8th",
     summary: "Algebra, geometry & reasoning workbook with solved examples.",
     price: "₹220",
   },

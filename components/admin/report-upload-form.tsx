@@ -8,6 +8,11 @@ import { uploadAnnualReport } from "@/app/admin/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  clearIfTooLarge,
+  MAX_UPLOAD_LABEL,
+  TOO_LARGE_MESSAGE,
+} from "@/lib/upload-limit";
 
 export function ReportUploadForm() {
   const formRef = React.useRef<HTMLFormElement>(null);
@@ -50,7 +55,11 @@ export function ReportUploadForm() {
           type="file"
           accept="application/pdf"
           required
+          onChange={(e) => {
+            if (clearIfTooLarge(e.currentTarget)) toast.error(TOO_LARGE_MESSAGE);
+          }}
         />
+        <p className="text-xs text-muted-foreground">Max file size {MAX_UPLOAD_LABEL}.</p>
       </div>
       <Button
         type="submit"

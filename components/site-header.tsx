@@ -67,7 +67,7 @@ const navGroups: NavGroup[] = [
   {
     title: "Competitive Exam",
     items: [
-      { title: "Homi Bhabha", href: "/homi-bhabha", description: "Balvaidnyanik Spardha — India's oldest science talent search for students." },
+      { title: "Homi Bhabha", href: "/homi-bhabha", description: "Balvaidnyanik Spardha - India's oldest science talent search for students." },
       { title: "Ganit Prabhutwa Pariksha", href: "/ganit-prabhutwa-pariksha", description: "A mathematics aptitude examination sharpening problem-solving from an early age." },
     ],
   },

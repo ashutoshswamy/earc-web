@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 
-import { YoutubeIcon, FacebookIcon } from "@/components/social-icons";
 
 const linkColumns = [
   {
@@ -24,12 +23,6 @@ const linkColumns = [
   },
 ];
 
-const socials = [
-  { label: "YouTube", href: "https://youtube.com", icon: YoutubeIcon },
-  { label: "Jnana Prabodhini", href: "https://facebook.com", icon: FacebookIcon },
-  { label: "Gyan-Setu", href: "https://facebook.com", icon: FacebookIcon },
-];
-
 export function SiteFooter() {
   return (
     <footer className="bg-emerald-deep text-parchment/80">
@@ -46,7 +39,7 @@ export function SiteFooter() {
               />
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-parchment/65">
-              Jnana Prabodhini&rsquo;s Educational Activity Research Centre —
+              Jnana Prabodhini&rsquo;s Educational Activity Research Centre -
               man making for nation building.
             </p>
             <ul className="mt-5 space-y-2 text-sm text-parchment/65">
@@ -94,25 +87,11 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col items-center gap-4 border-t border-parchment/10 pt-6 sm:flex-row sm:justify-between">
+        <div className="mt-12 border-t border-parchment/10 pt-6 text-center sm:text-left">
           <p className="text-xs text-parchment/50">
             © {new Date().getFullYear()} Jnana Prabodhini&rsquo;s Educational
             Activity Research Centre. All rights reserved.
           </p>
-          <div className="flex flex-wrap items-center gap-2">
-            {socials.map((social, i) => (
-              <a
-                key={`${social.label}-${i}`}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full bg-parchment/10 px-3 py-1.5 text-xs font-medium text-parchment/80 transition-colors hover:bg-amber-spark hover:text-emerald-deep"
-              >
-                <social.icon className="size-3.5" />
-                {social.label}
-              </a>
-            ))}
-          </div>
         </div>
       </div>
     </footer>

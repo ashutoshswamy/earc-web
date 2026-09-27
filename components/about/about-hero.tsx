@@ -47,7 +47,7 @@ export function AboutHero() {
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
             Jnana Prabodhini has carried a 50-plus year legacy of &ldquo;man
             making&rdquo; education. In 1993, that legacy took a dedicated
-            research arm — EARC was formed to study, refine, and spread this
+            research arm - EARC was formed to study, refine, and spread this
             philosophy to schools and educators across the country.
           </p>
         </motion.div>

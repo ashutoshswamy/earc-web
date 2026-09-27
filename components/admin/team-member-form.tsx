@@ -54,7 +54,7 @@ export function TeamMemberForm() {
         </div>
         <div className="flex flex-col gap-1.5">
           <Label htmlFor="tm-centre">Centre</Label>
-          <Input id="tm-centre" name="centre" placeholder="—" />
+          <Input id="tm-centre" name="centre" placeholder="-" />
         </div>
       </div>
       <Button

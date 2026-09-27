@@ -11,7 +11,7 @@ export function AboutCta() {
           Want to collaborate or learn more about our projects?
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-          Whether you&rsquo;re a school, a teacher, or a well-wisher — there&rsquo;s
+          Whether you&rsquo;re a school, a teacher, or a well-wisher - there&rsquo;s
           a way to work with EARC.
         </p>
         <div className="mt-7 flex flex-wrap items-center justify-center gap-3">

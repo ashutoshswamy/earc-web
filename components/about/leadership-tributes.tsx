@@ -1,19 +1,41 @@
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { ArrowDown } from "lucide-react";
 
-function initials(name: string) {
-  return name
-    .split(" ")
-    .map((w) => w[0])
-    .join("")
-    .slice(0, 2);
+import { createClient } from "@/lib/supabase/server";
+import type { Leader } from "@/lib/supabase/types";
+
+// Role + project, skipping whichever is empty ("Project Head - Gyan Setu", "HOD", or nothing).
+function subtitle(role: string, project: string) {
+  return [role, project].filter(Boolean).join(" - ");
 }
 
-const leaders = [
-  { name: "Prashant Divekar", role: "Head of EARC" },
-  { name: "Amar Paranjpe", role: "Deputy Head of EARC" },
-];
+// Shown until the `leaders` table exists (scripts/supabase-schema.sql); after that admin manages them.
+const defaultLeaders: Pick<Leader, "id" | "name" | "role" | "project">[] = [
+  ["Purva Dixit-Dhokte", "Project Head", "Chhote Scientists"],
+  ["Swapnil Indapurkar", "Project Head", "Gyan Setu"],
+  ["Shubhankar Kelkar", "", ""],
+  ["Rutuja Deshmukh", "", ""],
+  ["Omkar Banait", "", ""],
+  ["Prakash Rananware", "", ""],
+].map(([name, role, project]) => ({ id: name, name, role, project }));
 
-export function LeadershipTributes() {
+function Connector() {
+  return (
+    <ArrowDown
+      aria-hidden
+      className="mx-auto my-3 size-5 text-emerald-ink/40"
+      strokeWidth={1.75}
+    />
+  );
+}
+
+export async function LeadershipTributes() {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("leaders")
+    .select("*")
+    .order("created_at", { ascending: true });
+  const leaders = error ? defaultLeaders : ((data as Leader[]) ?? []);
+
   return (
     <section id="leadership" className="scroll-mt-24 bg-mist">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
@@ -27,13 +49,8 @@ export function LeadershipTributes() {
           </p>
         </div>
 
-        {/* Memorial tribute */}
-        <article className="mt-10 flex flex-col items-center gap-5 rounded-2xl border-2 border-amber-spark/40 bg-card p-8 text-center shadow-sm sm:flex-row sm:text-left">
-          <Avatar size="lg" className="size-20 shrink-0 ring-2 ring-amber-spark/50 ring-offset-2 ring-offset-card">
-            <AvatarFallback className="bg-emerald-ink font-heading text-xl text-parchment">
-              VP
-            </AvatarFallback>
-          </Avatar>
+        {/* ponytail: fixed top two live here, not in the DB, so admin can't delete them */}
+        <article className="mx-auto mt-10 max-w-xl rounded-2xl border-2 border-amber-spark/40 bg-card p-8 text-center shadow-sm">
           <div>
             <p className="text-xs font-semibold tracking-wide text-amber-spark uppercase">
               In memoriam
@@ -47,27 +64,42 @@ export function LeadershipTributes() {
           </div>
         </article>
 
-        {/* Current leadership */}
-        <div className="mt-5 grid gap-5 sm:grid-cols-2">
-          {leaders.map((leader) => (
-            <article
-              key={leader.name}
-              className="flex items-center gap-4 rounded-2xl border border-emerald-ink/10 bg-card p-6 shadow-sm"
-            >
-              <Avatar size="lg">
-                <AvatarFallback className="bg-mist font-heading font-semibold text-emerald-ink">
-                  {initials(leader.name)}
-                </AvatarFallback>
-              </Avatar>
-              <div>
-                <h3 className="font-heading text-base font-semibold text-emerald-deep">
-                  {leader.name}
-                </h3>
-                <p className="text-sm text-muted-foreground">{leader.role}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+        <Connector />
+
+        <article className="mx-auto max-w-sm rounded-2xl border border-emerald-ink/10 bg-card p-6 text-center shadow-sm">
+          <div>
+            <h3 className="font-heading text-base font-semibold text-emerald-deep">
+              Amar Paranjpe
+            </h3>
+            <p className="text-sm text-muted-foreground">HOD</p>
+          </div>
+        </article>
+
+        {leaders.length > 0 && (
+          <>
+            <Connector />
+            <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {leaders.map((leader) => {
+                const sub = subtitle(leader.role, leader.project);
+                return (
+                  <li
+                    key={leader.id}
+                    className="rounded-2xl border border-emerald-ink/10 bg-card p-5 text-center shadow-sm transition-shadow duration-300 hover:shadow-md"
+                  >
+                    <div>
+                      <h3 className="font-heading text-base font-semibold text-emerald-deep">
+                        {leader.name}
+                      </h3>
+                      {sub && (
+                        <p className="text-sm text-muted-foreground">{sub}</p>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </>
+        )}
       </div>
     </section>
   );

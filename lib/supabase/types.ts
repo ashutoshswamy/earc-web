@@ -77,6 +77,15 @@ export interface SuccessStory {
   created_by: string | null;
 }
 
+export interface Leader {
+  id: string;
+  name: string;
+  role: string;
+  project: string;
+  created_at: string;
+  created_by: string | null;
+}
+
 export interface ContactSubmission {
   id: string;
   first_name: string;

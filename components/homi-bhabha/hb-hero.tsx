@@ -35,7 +35,7 @@ export function HbHero() {
             strong conceptual understanding, intensive practice and
             confidence for the competition. The programme combines theory,
             problem-solving and hands-on practical learning, covering
-            concepts from the SSC, CBSE and ICSE syllabi — with practical
+            concepts from the SSC, CBSE and ICSE syllabi - with practical
             kits, guided experiments, test-series practice recordings,
             notes and personalised mentoring for every level of the exam.
           </p>

@@ -1,5 +1,5 @@
 -- Complete schema for the EARC site. Run in the Supabase SQL editor.
--- Idempotent: safe to re-run — every policy is dropped and recreated, and
+-- Idempotent: safe to re-run - every policy is dropped and recreated, and
 -- tables/buckets use "if not exists". To wipe everything first, run
 -- scripts/supabase-reset.sql.
 
@@ -17,7 +17,7 @@ create policy "read own profile"
   on public.profiles for select
   using (auth.uid() = id);
 
--- creates a profile row (default role 'user') whenever a user is created —
+-- creates a profile row (default role 'user') whenever a user is created -
 -- fires whether they're added via the app or manually in the Supabase
 -- dashboard (Authentication -> Users -> Add user)
 create or replace function public.handle_new_user()
@@ -36,7 +36,7 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
 
--- the trigger above only fires for auth.users rows created AFTER it exists —
+-- the trigger above only fires for auth.users rows created AFTER it exists -
 -- backfill a profile row for any user that predates it (e.g. an admin
 -- created in the dashboard before this script was first run), so login
 -- doesn't bounce back to /login for having no matching profiles row.
@@ -49,7 +49,7 @@ on conflict (id) do nothing;
 -- To create an admin: Authentication -> Users -> Add user in the Supabase
 -- dashboard, then run:
 --   update public.profiles set role = 'admin' where id = '<their-user-uuid>';
--- There is no public signup flow — this is the only way in.
+-- There is no public signup flow - this is the only way in.
 
 -- 2. gallery_items -----------------------------------------------------
 create table if not exists public.gallery_items (
@@ -131,7 +131,7 @@ create table if not exists public.team_members (
   name text not null,
   designation text not null,
   project text not null,
-  centre text not null default '—',
+  centre text not null default '-',
   created_at timestamptz not null default now(),
   created_by uuid references auth.users (id)
 );
@@ -148,6 +148,43 @@ create policy "admins write team_members"
   on public.team_members for all
   using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'))
   with check (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
+
+-- 5b. leaders (About → Leadership grid; Vivek Ponkshe + Amar Paranjpe are
+--     fixed in components/about/leadership-tributes.tsx, not stored here) --
+create table if not exists public.leaders (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  role text not null default '',
+  project text not null default '',
+  created_at timestamptz not null default now(),
+  created_by uuid references auth.users (id)
+);
+
+alter table public.leaders enable row level security;
+
+drop policy if exists "public read leaders" on public.leaders;
+create policy "public read leaders"
+  on public.leaders for select
+  using (true);
+
+drop policy if exists "admins write leaders" on public.leaders;
+create policy "admins write leaders"
+  on public.leaders for all
+  using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'))
+  with check (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
+
+-- seed once (skipped if any leader exists); staggered created_at keeps order
+insert into public.leaders (name, role, project, created_at)
+select v.name, v.role, v.project, now() + (v.ord * interval '1 second')
+from (values
+  (1, 'Purva Dixit-Dhokte', 'Project Head', 'Chhote Scientists'),
+  (2, 'Swapnil Indapurkar', 'Project Head', 'Gyan Setu'),
+  (3, 'Shubhankar Kelkar', '', ''),
+  (4, 'Rutuja Deshmukh', '', ''),
+  (5, 'Omkar Banait', '', ''),
+  (6, 'Prakash Rananware', '', '')
+) as v(ord, name, role, project)
+where not exists (select 1 from public.leaders);
 
 -- 6. partners (CSR / project collaborators) -----------------------------
 create table if not exists public.partners (
@@ -235,7 +272,7 @@ create policy "admins write success_stories"
 
 -- 9. hb_registrations (Homi Bhabha batch registrations) ------------------
 -- Holds personal/contact data and a payment-screenshot reference, so unlike
--- the public-read tables above, only admins can read rows back — anyone can
+-- the public-read tables above, only admins can read rows back - anyone can
 -- submit, nobody but an admin can list or view submissions.
 create table if not exists public.hb_registrations (
   id uuid primary key default gen_random_uuid(),
@@ -392,3 +429,81 @@ drop policy if exists "admins delete hb-registrations bucket" on storage.objects
 create policy "admins delete hb-registrations bucket"
   on storage.objects for delete
   using (bucket_id = 'hb-registrations' and exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
+
+-- 12. hardening for anonymous writes ------------------------------------
+-- The anon key is public, so anyone can insert into these tables directly
+-- via the REST API, skipping the server-action checks. Enforce the same
+-- rules in the database. NOT VALID = existing rows aren't re-checked.
+
+alter table public.contact_submissions drop constraint if exists contact_submissions_limits;
+alter table public.contact_submissions add constraint contact_submissions_limits check (
+  char_length(first_name) between 1 and 200
+  and char_length(last_name) between 1 and 200
+  and char_length(email) between 3 and 200
+  and email ~ '^[^@[:space:]]+@[^@[:space:]]+\.[^@[:space:]]+$'
+  and char_length(subject) between 1 and 200
+  and char_length(message) between 1 and 5000
+) not valid;
+
+alter table public.testimonials drop constraint if exists testimonials_limits;
+alter table public.testimonials add constraint testimonials_limits check (
+  char_length(quote) between 1 and 1000
+  and char_length(name) between 1 and 200
+  and char_length(detail) between 1 and 200
+) not valid;
+
+alter table public.hb_registrations drop constraint if exists hb_registrations_limits;
+alter table public.hb_registrations add constraint hb_registrations_limits check (
+  char_length(course_id) between 1 and 100
+  and char_length(payment_screenshot_path) between 1 and 300
+  and email ~ '^[^@[:space:]]+@[^@[:space:]]+\.[^@[:space:]]+$'
+  and greatest(
+    char_length(student_name_mr_surname), char_length(student_name_mr_name),
+    char_length(student_name_mr_father), char_length(student_name_en_surname),
+    char_length(student_name_en_name), char_length(student_name_en_middle),
+    char_length(address), char_length(village), char_length(taluka),
+    char_length(district), char_length(parent_name), char_length(whatsapp_no),
+    char_length(email), char_length(school_name), char_length(school_address),
+    char_length(school_timing_weekday), char_length(school_timing_saturday)
+  ) <= 500
+) not valid;
+
+-- payment screenshots: images only, 4MB max (matches the server action)
+update storage.buckets
+set file_size_limit = 4194304, allowed_mime_types = array['image/*']
+where id = 'hb-registrations';
+
+-- Flood guard: reject inserts once a table got 30 rows in the last minute.
+-- ponytail: global limit, not per visitor; move to per-IP limits or a
+-- captcha (Cloudflare Turnstile) if real spam shows up.
+create or replace function public.limit_insert_rate()
+returns trigger
+language plpgsql
+security definer set search_path = public
+as $$
+declare
+  recent int;
+begin
+  new.created_at := now(); -- no backdating to dodge the count
+  execute format(
+    'select count(*) from %I.%I where created_at > now() - interval ''1 minute''',
+    tg_table_schema, tg_table_name
+  ) into recent;
+  if recent >= 30 then
+    raise exception 'Too many submissions, try again in a minute';
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists limit_rate on public.contact_submissions;
+create trigger limit_rate before insert on public.contact_submissions
+  for each row execute function public.limit_insert_rate();
+
+drop trigger if exists limit_rate on public.testimonials;
+create trigger limit_rate before insert on public.testimonials
+  for each row execute function public.limit_insert_rate();
+
+drop trigger if exists limit_rate on public.hb_registrations;
+create trigger limit_rate before insert on public.hb_registrations
+  for each row execute function public.limit_insert_rate();

@@ -8,7 +8,7 @@ import { ServicesCta } from "@/components/services/services-cta";
 import { SiteFooter } from "@/components/site-footer";
 
 export const metadata: Metadata = {
-  title: "Services — EARC",
+  title: "Services - EARC",
   description:
     "EARC's teacher training programmes, workshops, and school enrichment offerings.",
 };

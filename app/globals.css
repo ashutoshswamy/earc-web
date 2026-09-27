@@ -7,7 +7,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-plus-jakarta);
+  --font-sans: var(--font-dm-sans);
   --font-mono: var(--font-plex-mono);
   --font-heading: var(--font-fraunces);
   --color-emerald-ink: var(--emerald-ink);
@@ -141,7 +141,7 @@
 }
 
 /* signature: ruled-notebook margin, referencing the exercise books EARC's
-   exam takers fill — a thin amber rule offset from a hairline edge */
+   exam takers fill - a thin amber rule offset from a hairline edge */
 .ruled-margin {
   position: relative;
   padding-left: 1.25rem;
@@ -167,7 +167,7 @@
 }
 
 /* signature: graph-paper grid, referencing the squared workbooks Ganit
-   Prabhutwa students solve on — a math counterpart to the ruled margin */
+   Prabhutwa students solve on - a math counterpart to the ruled margin */
 .grid-paper-bg {
   background-image:
     repeating-linear-gradient(

@@ -10,9 +10,9 @@ import { createClient } from "@/lib/supabase/server";
 import type { GpPaper } from "@/lib/supabase/types";
 
 export const metadata: Metadata = {
-  title: "Ganit Prabhutwa Pariksha — EARC",
+  title: "Ganit Prabhutwa Pariksha - EARC",
   description:
-    "Exam information, old question papers, model answer sheets, reference books, and testimonials for the Ganit Prabhutwa Pariksha — Std. 5th & 8th, by Jnana Prabodhini's EARC.",
+    "Exam information, old question papers, model answer sheets, reference books, and testimonials for the Ganit Prabhutwa Pariksha - Std. 5th & 8th, by Jnana Prabodhini's EARC.",
 };
 
 export default async function GanitPrabhutwaPage() {

@@ -106,7 +106,7 @@ function TestimonialRow({ item }: { item: Testimonial }) {
       <div className="min-w-0 flex-1">
         <p className="text-sm text-emerald-deep">&ldquo;{item.quote}&rdquo;</p>
         <p className="mt-1 text-xs text-muted-foreground">
-          {item.name} — {item.detail}
+          {item.name} - {item.detail}
         </p>
       </div>
       <div className="flex shrink-0 gap-1">

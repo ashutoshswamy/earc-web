@@ -14,7 +14,7 @@ const programs = [
     icon: Lightbulb,
     title: "Pedagogy & Skills",
     focus:
-      "Activity-based, project-based, and experiential learning. Soft-skill modules for teachers — planning, communication, guidance — and student skill enrichment in self-study, reading, and creative thinking.",
+      "Activity-based, project-based, and experiential learning. Soft-skill modules for teachers - planning, communication, guidance - and student skill enrichment in self-study, reading, and creative thinking.",
     cta: "View modules",
     href: "/services#workshops",
   },
@@ -30,7 +30,7 @@ const programs = [
     icon: Users,
     title: "Trainers' Training for Non-Formal Education",
     focus:
-      "Building the field facilitators — Shikshandoots, Vidnyan Doots and Kendra Samanvayaks — who run EARC's non-formal programmes: content, activity-based pedagogy, session planning, mentoring and community engagement.",
+      "Building the field facilitators - Shikshandoots, Vidnyan Doots and Kendra Samanvayaks - who run EARC's non-formal programmes: content, activity-based pedagogy, session planning, mentoring and community engagement.",
     cta: "Inquire for training",
     href: "/contact",
   },
@@ -46,7 +46,7 @@ export function TrainingPrograms() {
           </h2>
           <p className="mt-2 text-muted-foreground">
             Tracks that take an educator from curriculum to classroom to
-            school-wide leadership — plus training for non-formal education
+            school-wide leadership - plus training for non-formal education
             facilitators.
           </p>
         </div>

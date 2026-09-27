@@ -1,7 +1,5 @@
 import { Quote } from "lucide-react";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-
 export function Testimonial() {
   return (
     <section className="bg-emerald-ink">
@@ -14,12 +12,7 @@ export function Testimonial() {
         </blockquote>
 
         <div className="mt-8 flex items-center justify-center gap-3">
-          <Avatar size="lg">
-            <AvatarFallback className="bg-amber-spark font-heading font-semibold text-emerald-deep">
-              RM
-            </AvatarFallback>
-          </Avatar>
-          <div className="text-left">
+          <div className="text-center">
             <p className="font-heading text-sm font-semibold text-parchment">
               Raghunath Mashelkar
             </p>

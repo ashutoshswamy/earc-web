@@ -25,7 +25,7 @@ export async function Partners() {
 
         {partners.length === 0 ? (
           <p className="mt-10 text-muted-foreground">
-            Partner details are being compiled — check back soon.
+            Partner details are being compiled - check back soon.
           </p>
         ) : (
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

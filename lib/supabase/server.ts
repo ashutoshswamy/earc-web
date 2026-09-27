@@ -18,7 +18,7 @@ export async function createClient() {
               cookieStore.set(name, value, options)
             );
           } catch {
-            // called from a Server Component — proxy.ts refreshes the
+            // called from a Server Component - proxy.ts refreshes the
             // session cookie on the next request instead.
           }
         },

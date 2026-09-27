@@ -3,7 +3,7 @@ import { Quote } from "lucide-react";
 const testimonials = [
   {
     quote:
-      "The weekly practice sets made word problems click for my daughter — she went from dreading maths to asking for extra sheets.",
+      "The weekly practice sets made word problems click for my daughter - she went from dreading maths to asking for extra sheets.",
     name: "Parent, Std. 5th student",
   },
   {

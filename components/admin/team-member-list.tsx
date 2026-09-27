@@ -145,7 +145,7 @@ export function TeamMemberList({ items }: { items: TeamMember[] }) {
                 <p className="truncate text-sm font-medium text-emerald-deep">
                   {item.name}
                   <span className="ml-1.5 font-normal text-muted-foreground">
-                    — {item.designation}
+                    - {item.designation}
                   </span>
                 </p>
                 <p className="text-xs text-muted-foreground">

@@ -19,7 +19,7 @@ const faqs = [
   {
     question: "Should the full fee be paid at once? Is any discount available?",
     answer:
-      "The fee can be paid in full at registration, or in two instalments across the phases. Sibling and early-bird discounts are available — ask the batch contact when you call.",
+      "The fee can be paid in full at registration, or in two instalments across the phases. Sibling and early-bird discounts are available - ask the batch contact when you call.",
   },
   {
     question: "Will session recordings be available?",

@@ -1,5 +1,5 @@
 -- DESTRUCTIVE. Erases everything scripts/supabase-schema.sql creates in the
--- database — every table, policy, trigger, function, and all profile/role
+-- database - every table, policy, trigger, function, and all profile/role
 -- and metadata rows. Run in the Supabase SQL editor to wipe back to empty,
 -- then re-run supabase-schema.sql to rebuild.
 -- Idempotent: safe to run even if parts were already removed.
@@ -19,6 +19,7 @@
 -- 1. auth trigger + function -----------------------------------------
 drop trigger if exists on_auth_user_created on auth.users;
 drop function if exists public.handle_new_user() cascade;
+drop function if exists public.limit_insert_rate() cascade;
 
 -- 2. storage.objects policies (storage.objects itself is Supabase-managed
 --    and stays, so its policies must be dropped by name) --------------
@@ -38,6 +39,7 @@ drop policy if exists "admins delete hb-registrations bucket" on storage.objects
 drop table if exists public.gallery_items cascade;
 drop table if exists public.annual_reports cascade;
 drop table if exists public.gp_papers cascade;
+drop table if exists public.leaders cascade;
 drop table if exists public.team_members cascade;
 drop table if exists public.partners cascade;
 drop table if exists public.testimonials cascade;

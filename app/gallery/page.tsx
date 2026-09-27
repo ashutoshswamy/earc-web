@@ -8,7 +8,7 @@ import { createClient } from "@/lib/supabase/server";
 import type { GalleryItem } from "@/lib/supabase/types";
 
 export const metadata: Metadata = {
-  title: "Gallery — EARC",
+  title: "Gallery - EARC",
   description: "Photos and videos from EARC's programmes and workshops.",
 };
 
@@ -42,7 +42,7 @@ export default async function GalleryPage() {
             <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-emerald-ink/20 py-20 text-center">
               <ImageOff className="size-8 text-muted-foreground" strokeWidth={1.5} />
               <p className="text-muted-foreground">
-                Nothing here yet — check back soon.
+                Nothing here yet - check back soon.
               </p>
             </div>
           ) : (

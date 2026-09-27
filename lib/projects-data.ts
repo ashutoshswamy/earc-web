@@ -49,6 +49,7 @@ export const projects: Project[] = [
     title: "Anubhav Shala",
     category: "personality-development",
     icon: Sprout,
+    logo: "/anubhav_shala.png",
     summary:
       "Anubhav Shala is an educational initiative for children aged 6–11 years living in urban communities of Pune. The programme supports children in accessing primary education while creating opportunities for foundational learning, skill development and holistic growth.",
     objectives: [
@@ -90,6 +91,7 @@ export const projects: Project[] = [
     title: "Chhote Scientists",
     category: "subject-specific",
     icon: FlaskConical,
+    logo: "/chhote_scientists.png",
     summary:
       "Chhote Scientists is an experiential science learning programme for students from Grades 5 to 9. It encourages children to explore science through observation, questioning, experimentation and problem-solving, making learning engaging and connected to everyday life.",
     objectives: [
@@ -110,7 +112,7 @@ export const projects: Project[] = [
       "Project-based Learning",
     ],
     enrichmentOpportunities: [
-      "Science Competitions for selected students — V-Gyan, Skill-Synch & V-Solve",
+      "Science Competitions for selected students - V-Gyan, Skill-Synch & V-Solve",
       "Residential Science Camps for competition winners",
     ],
   },
@@ -119,6 +121,7 @@ export const projects: Project[] = [
     title: "LearnEng",
     category: "subject-specific",
     icon: Languages,
+    logo: "/learning.png",
     summary:
       "LearnEng is an activity-based English-language and life-skills development programme for students in rural government and aided schools. It aims to build confidence in English communication, develop life skills for self-progress and sustainable livelihood, and nurture local youth leadership.",
     objectives: [
@@ -148,6 +151,7 @@ export const projects: Project[] = [
     title: "Padhai Se Dosti",
     category: "personality-development",
     icon: Handshake,
+    logo: "/padhai_se_dosti.png",
     summary:
       "Padhai Se Dosti is a facilitator-led learning support programme for students of Grades 5–7, designed to nurture a passion for learning and build essential study skills among underprivileged and rural students. Through regular, activity-based sessions held close to where children live, it creates a space where they can freely learn, explore and strengthen their foundational abilities.",
     objectives: [
@@ -169,18 +173,19 @@ export const projects: Project[] = [
     title: "Gyan Setu",
     category: "community-outreach",
     icon: Handshake,
+    logo: "/gyan_setu.png",
     summary:
       "Gyan-Setu is a volunteer-led educational outreach initiative of the Educational Activity Research Centre (EARC), Jnana Prabodhini, Pune. Initiated in 2013, it connects young volunteers with students and communities across diverse regions of India through experiential education, cultural exchange and national integration.",
     objectives: [
-      "Volunteer Development & Leadership — develop socially aware, responsible and capable young leaders through training and field experience",
-      "National Integration — build meaningful connections between youth and communities across different regions of India",
-      "Experiential Education — enrich students' learning through engaging, activity-based educational experiences",
-      "Mutual Learning — create opportunities for volunteers, students and communities to learn from one another",
+      "Volunteer Development & Leadership - develop socially aware, responsible and capable young leaders through training and field experience",
+      "National Integration - build meaningful connections between youth and communities across different regions of India",
+      "Experiential Education - enrich students' learning through engaging, activity-based educational experiences",
+      "Mutual Learning - create opportunities for volunteers, students and communities to learn from one another",
     ],
     reach:
       "Volunteer-led programmes across diverse, remote and developmentally challenged regions of India, running since 2013.",
     structure:
-      "1. Preparation & Training — volunteer selection, orientation, subject training, regional understanding and field planning. 2. Field Implementation — teams travel to selected regions and conduct activity-based educational programmes in schools and communities. 3. Reflection & Sharing — volunteers assess their field experience, reflect on their learning and share experiences for continued development.",
+      "1. Preparation & Training - volunteer selection, orientation, subject training, regional understanding and field planning. 2. Field Implementation - teams travel to selected regions and conduct activity-based educational programmes in schools and communities. 3. Reflection & Sharing - volunteers assess their field experience, reflect on their learning and share experiences for continued development.",
     methodology:
       "Activity-based learning through experiments, demonstrations, games and interactive sessions. Volunteer-led education, with volunteers trained before field visits. Learning through field experience by interacting with students, teachers and local communities. Cultural exchange through participation in and understanding of local life and culture. Reflection and assessment to strengthen volunteer learning and improve future programmes.",
     keyActivities: [
@@ -201,6 +206,7 @@ export const projects: Project[] = [
     title: "Pradnya Vikas",
     category: "personality-development",
     icon: Award,
+    logo: "/pragya_vikas.png",
     summary:
       "Pradnya Vikas is a talent development programme of Jnana Prabodhini EARC that works with students from Grades 7 to 10 in communities across Pune. The programme is based on the belief that every individual has the potential for growth, which can be nurtured through meaningful experiences, dedicated mentoring and continuous effort.",
     objectives: [
@@ -237,6 +243,7 @@ export const projects: Project[] = [
     title: "Vikas Mitra",
     category: "personality-development",
     icon: Users,
+    logo: "/vikasmitra.png",
     summary:
       "Vikas Mitra is a rural and tribal education initiative of Jnana Prabodhini EARC that works with students from Grades 5 to 10. The programme aims to bridge educational gaps by providing structured, experiential and skill-oriented learning opportunities that develop students' learning abilities, thinking skills, confidence and aspirations. Vikas Mitra goes beyond academic support by helping students learn independently, think critically, solve problems, explore opportunities and connect learning with their local context and everyday experiences.",
     objectives: [

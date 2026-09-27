@@ -2,13 +2,21 @@
 
 import * as React from "react";
 import { toast } from "sonner";
-import { ChevronDown, ChevronUp, ExternalLink, Loader2, Trash2 } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronUp,
+  Download,
+  ExternalLink,
+  Loader2,
+  Trash2,
+} from "lucide-react";
 
 import {
   deleteHbRegistration,
   getHbRegistrationScreenshotUrl,
 } from "@/app/admin/actions";
 import { Button } from "@/components/ui/button";
+import { downloadCsv } from "@/lib/csv";
 import type { HbRegistration } from "@/lib/supabase/types";
 
 const detailFields: [keyof HbRegistration, string][] = [
@@ -29,6 +37,26 @@ const detailFields: [keyof HbRegistration, string][] = [
   ["preferred_slot", "Preferred slot"],
   ["heard_from", "Heard from"],
 ];
+
+const csvFields: [keyof HbRegistration, string][] = [
+  ["course_id", "Course"],
+  ["student_name_en_surname", "Surname (English)"],
+  ["student_name_en_name", "Name (English)"],
+  ["student_name_en_middle", "Middle name (English)"],
+  ["whatsapp_no", "WhatsApp"],
+  ["email", "Email"],
+  ...detailFields,
+];
+
+function exportCsv(items: HbRegistration[]) {
+  downloadCsv("hb-registrations", [
+    ["Date", ...csvFields.map(([, label]) => label)],
+    ...items.map((i) => [
+      new Date(i.created_at).toLocaleString("en-IN"),
+      ...csvFields.map(([key]) => String(i[key] ?? "")),
+    ]),
+  ]);
+}
 
 function RegistrationRow({ item }: { item: HbRegistration }) {
   const [expanded, setExpanded] = React.useState(false);
@@ -127,10 +155,22 @@ export function HbRegistrationList({ items }: { items: HbRegistration[] }) {
   }
 
   return (
-    <ul className="flex flex-col gap-2">
-      {items.map((item) => (
-        <RegistrationRow key={item.id} item={item} />
-      ))}
-    </ul>
+    <div className="flex flex-col gap-3">
+      <Button
+        type="button"
+        size="sm"
+        variant="outline"
+        className="gap-2 self-end"
+        onClick={() => exportCsv(items)}
+      >
+        <Download className="size-3.5" />
+        Export CSV
+      </Button>
+      <ul className="flex flex-col gap-2">
+        {items.map((item) => (
+          <RegistrationRow key={item.id} item={item} />
+        ))}
+      </ul>
+    </div>
   );
 }

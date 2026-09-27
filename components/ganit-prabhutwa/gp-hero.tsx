@@ -34,7 +34,7 @@ export function GpHero() {
 
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
             JPEARC, in collaboration with the Pune Jilha Ganit Adhyapak
-            Mandal, conducts Ganit Prabhutwa — a mathematics proficiency
+            Mandal, conducts Ganit Prabhutwa - a mathematics proficiency
             examination assessing conceptual understanding, mathematical
             thinking and the ability to represent mathematical ideas beyond
             rote learning. It encourages students to approach mathematics
