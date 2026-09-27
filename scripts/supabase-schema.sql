@@ -149,16 +149,20 @@ create policy "admins write team_members"
   using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'))
   with check (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
 
--- 5b. leaders (About → Leadership grid; Vivek Ponkshe + Amar Paranjpe are
---     fixed in components/about/leadership-tributes.tsx, not stored here) --
+-- 5b. leaders (About → Leadership; tier picks the card: memoriam / head / team) --
 create table if not exists public.leaders (
   id uuid primary key default gen_random_uuid(),
   name text not null,
   role text not null default '',
   project text not null default '',
+  tier text not null default 'team' check (tier in ('memoriam', 'head', 'team')),
   created_at timestamptz not null default now(),
   created_by uuid references auth.users (id)
 );
+
+alter table public.leaders
+  add column if not exists tier text not null default 'team'
+  check (tier in ('memoriam', 'head', 'team'));
 
 alter table public.leaders enable row level security;
 
@@ -172,19 +176,6 @@ create policy "admins write leaders"
   on public.leaders for all
   using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'))
   with check (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
-
--- seed once (skipped if any leader exists); staggered created_at keeps order
-insert into public.leaders (name, role, project, created_at)
-select v.name, v.role, v.project, now() + (v.ord * interval '1 second')
-from (values
-  (1, 'Purva Dixit-Dhokte', 'Project Head', 'Chhote Scientists'),
-  (2, 'Swapnil Indapurkar', 'Project Head', 'Gyan Setu'),
-  (3, 'Shubhankar Kelkar', '', ''),
-  (4, 'Rutuja Deshmukh', '', ''),
-  (5, 'Omkar Banait', '', ''),
-  (6, 'Prakash Rananware', '', '')
-) as v(ord, name, role, project)
-where not exists (select 1 from public.leaders);
 
 -- 6. partners (CSR / project collaborators) -----------------------------
 create table if not exists public.partners (

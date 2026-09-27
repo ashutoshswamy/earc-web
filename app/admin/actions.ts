@@ -338,12 +338,14 @@ export async function addLeader(formData: FormData) {
   const name = String(formData.get("name") ?? "").trim();
   const role = String(formData.get("role") ?? "").trim();
   const project = String(formData.get("project") ?? "").trim();
+  const tier = String(formData.get("tier") ?? "team");
 
   if (!name) return { error: "Name is required." };
+  if (!["memoriam", "head", "team"].includes(tier)) return { error: "Invalid tier." };
 
   const { error } = await supabase
     .from("leaders")
-    .insert({ name, role, project, created_by: profile.id });
+    .insert({ name, role, project, tier, created_by: profile.id });
   if (error) return { error: error.message };
 
   revalidatePath("/about");

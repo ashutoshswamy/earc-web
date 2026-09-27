@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { toast } from "sonner";
-import { Loader2, Lock, Trash2, UserPlus, UserRound } from "lucide-react";
+import { Loader2, Trash2, UserPlus, UserRound } from "lucide-react";
 
 import { addLeader, deleteLeader } from "@/app/admin/actions";
 import { Button } from "@/components/ui/button";
@@ -14,8 +14,11 @@ import type { Leader } from "@/lib/supabase/types";
 const selectClass =
   "flex h-9 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50";
 
-// Shown read-only; they're hardcoded in components/about/leadership-tributes.tsx.
-const fixedLeaders = ["Vivek Ponkshe", "Amar Paranjpe - HOD"];
+const tierLabels: Record<Leader["tier"], string> = {
+  memoriam: "In memoriam (top card)",
+  head: "Head (middle card)",
+  team: "Team (grid)",
+};
 
 export function LeaderAdmin({ items }: { items: Leader[] }) {
   const formRef = React.useRef<HTMLFormElement>(null);
@@ -50,7 +53,7 @@ export function LeaderAdmin({ items }: { items: Leader[] }) {
     <div className="flex flex-col gap-5">
       <div className="rounded-2xl border border-emerald-ink/10 bg-card p-6 shadow-sm">
         <form ref={formRef} action={handleSubmit} className="flex flex-col gap-4">
-          <div className="grid gap-3 sm:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <div className="flex flex-col gap-1.5">
               <Label htmlFor="ld-name">Name</Label>
               <Input id="ld-name" name="name" required />
@@ -66,6 +69,16 @@ export function LeaderAdmin({ items }: { items: Leader[] }) {
                 {PROJECT_NAMES.map((name) => (
                   <option key={name} value={name}>
                     {name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="ld-tier">Placement</Label>
+              <select id="ld-tier" name="tier" defaultValue="team" className={selectClass}>
+                {Object.entries(tierLabels).map(([value, label]) => (
+                  <option key={value} value={value}>
+                    {label}
                   </option>
                 ))}
               </select>
@@ -87,16 +100,6 @@ export function LeaderAdmin({ items }: { items: Leader[] }) {
       </div>
 
       <ul className="flex flex-col gap-2">
-        {fixedLeaders.map((label) => (
-          <li
-            key={label}
-            className="flex items-center gap-3 rounded-xl border border-emerald-ink/10 bg-mist p-3"
-          >
-            <Lock className="size-5 shrink-0 text-muted-foreground" strokeWidth={1.75} />
-            <p className="flex-1 text-sm font-medium text-emerald-deep">{label}</p>
-            <span className="text-xs text-muted-foreground">Fixed</span>
-          </li>
-        ))}
         {items.map((item) => (
           <li
             key={item.id}
@@ -106,7 +109,9 @@ export function LeaderAdmin({ items }: { items: Leader[] }) {
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium text-emerald-deep">{item.name}</p>
               <p className="text-xs text-muted-foreground">
-                {[item.role, item.project].filter(Boolean).join(" - ") || "No role yet"}
+                {tierLabels[item.tier]}
+                {[item.role, item.project].filter(Boolean).length > 0 &&
+                  ` · ${[item.role, item.project].filter(Boolean).join(" - ")}`}
               </p>
             </div>
             <Button

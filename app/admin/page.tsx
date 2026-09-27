@@ -173,7 +173,7 @@ export default async function AdminPage() {
     {
       id: "leadership",
       label: "Leadership",
-      description: "People shown under About → Leadership. The top two are fixed.",
+      description: "People shown under About → Leadership. Nothing shows until added here.",
       icon: <UserRoundCog className="size-4 shrink-0" strokeWidth={1.75} />,
       badge: leaders.length,
       content: <LeaderAdmin items={leaders} />,

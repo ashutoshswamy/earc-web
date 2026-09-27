@@ -82,6 +82,7 @@ export interface Leader {
   name: string;
   role: string;
   project: string;
+  tier: "memoriam" | "head" | "team";
   created_at: string;
   created_by: string | null;
 }

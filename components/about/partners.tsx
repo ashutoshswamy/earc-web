@@ -34,12 +34,12 @@ export async function Partners() {
                 key={partner.id}
                 className="flex flex-col items-center rounded-2xl border border-emerald-ink/10 bg-card p-8 text-center shadow-sm"
               >
-                <div className="relative h-12 w-full">
+                <div className="relative h-20 w-full">
                   <Image
                     src={partner.url}
                     alt={partner.csr_partner}
                     fill
-                    sizes="160px"
+                    sizes="320px"
                     className="object-contain"
                   />
                 </div>
