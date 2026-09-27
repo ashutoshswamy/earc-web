@@ -1,11 +1,11 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 
-import { YoutubeIcon, FacebookIcon } from "@/components/social-icons";
+import { YoutubeIcon, FacebookIcon, InstagramIcon } from "@/components/social-icons";
 
 const socials = [
-  { label: "YouTube", href: "https://youtube.com", icon: YoutubeIcon },
-  { label: "Jnana Prabodhini", href: "https://facebook.com", icon: FacebookIcon },
-  { label: "Gyan-Setu", href: "https://facebook.com", icon: FacebookIcon },
+  { label: "YouTube", href: "https://youtube.com/@jpearc7032", icon: YoutubeIcon, color: "text-[#FF0000]" },
+  { label: "Facebook", href: "https://www.facebook.com/share/1GSJYNe61R/", icon: FacebookIcon, color: "text-[#1877F2]" },
+  { label: "Instagram", href: "https://www.instagram.com/earc.jp", icon: InstagramIcon, color: "text-[#E4405F]" },
 ];
 
 export function ContactInfo() {
@@ -80,7 +80,7 @@ export function ContactInfo() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-full border border-emerald-ink/15 bg-mist px-3 py-1.5 text-xs font-medium text-emerald-deep transition-colors hover:border-amber-spark/40 hover:bg-amber-spark/15"
             >
-              <social.icon className="size-3.5" />
+              <social.icon className={`size-4 ${social.color}`} />
               {social.label}
             </a>
           ))}
