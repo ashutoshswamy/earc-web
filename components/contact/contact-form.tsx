@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { Loader2, Send } from "lucide-react";
 
 import { submitContactMessage } from "@/app/admin/actions";
+import { projects } from "@/lib/projects-data";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -25,7 +26,7 @@ const subjects = [
   { value: "homi-bhabha", label: "Homi Bhabha" },
   { value: "ganit-prabhutwa", label: "Ganit Prabhutwa Pariksha" },
   { value: "school-enrichment", label: "School enrichment programme" },
-  { value: "all-projects", label: "All projects" },
+  ...projects.map((p) => ({ value: p.id, label: p.title })),
   { value: "other", label: "Something else" },
 ];
 
