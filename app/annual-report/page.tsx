@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import { Download, FileText, FileX2 } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { createClient } from "@/lib/supabase/server";
 import type { AnnualReport } from "@/lib/supabase/types";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Annual Report - EARC",
-  description: "EARC's published annual reports.",
-};
+export const metadata = pageMetadata(
+  "/annual-report",
+  "Annual Report",
+  "EARC's published annual reports.",
+);
 
 export default async function AnnualReportPage() {
   const supabase = await createClient();

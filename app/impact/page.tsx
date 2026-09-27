@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ImpactMetrics } from "@/components/impact-metrics";
 import { TestimonialsSection } from "@/components/impact/testimonials-section";
 import { SuccessStoriesSection } from "@/components/impact/success-stories-section";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Impact - EARC",
-  description: "EARC's reach, outcomes, testimonials, and success stories.",
-};
+export const metadata = pageMetadata(
+  "/impact",
+  "Impact",
+  "EARC's reach, outcomes, testimonials, and success stories.",
+);
 
 export default function ImpactPage() {
   return (

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 
 import { SiteHeader } from "@/components/site-header";
 import { ContactHero } from "@/components/contact/contact-hero";
@@ -6,12 +5,13 @@ import { ContactInfo } from "@/components/contact/contact-info";
 import { ContactForm } from "@/components/contact/contact-form";
 import { LocationMap } from "@/components/contact/location-map";
 import { SiteFooter } from "@/components/site-footer";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact Us - EARC",
-  description:
-    "Reach EARC for questions about programmes, teacher training, or initiatives.",
-};
+export const metadata = pageMetadata(
+  "/contact",
+  "Contact Us",
+  "Reach EARC for questions about programmes, teacher training, or initiatives.",
+);
 
 export default function ContactPage() {
   return (

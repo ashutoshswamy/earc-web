@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Suspense } from "react";
 
 import { SiteHeader } from "@/components/site-header";
@@ -8,12 +7,13 @@ import { GpTabs } from "@/components/ganit-prabhutwa/gp-tabs";
 import { SiteFooter } from "@/components/site-footer";
 import { createClient } from "@/lib/supabase/server";
 import type { GpPaper } from "@/lib/supabase/types";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Ganit Prabhutwa Pariksha - EARC",
-  description:
-    "Exam information, old question papers, model answer sheets, reference books, and testimonials for the Ganit Prabhutwa Pariksha - Std. 5th & 8th, by Jnana Prabodhini's EARC.",
-};
+export const metadata = pageMetadata(
+  "/ganit-prabhutwa-pariksha",
+  "Ganit Prabhutwa Pariksha",
+  "Exam information, old question papers, model answer sheets, reference books, and testimonials for the Ganit Prabhutwa Pariksha - Std. 5th & 8th, by Jnana Prabodhini's EARC.",
+);
 
 export default async function GanitPrabhutwaPage() {
   const supabase = await createClient();

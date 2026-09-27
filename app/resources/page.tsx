@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import { BookOpen, FileStack } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Resources - EARC",
-  description: "Learning resources and project-wise reports from EARC.",
-};
+export const metadata = pageMetadata(
+  "/resources",
+  "Resources",
+  "Learning resources and project-wise reports from EARC.",
+);
 
 export default function ResourcesPage() {
   return (

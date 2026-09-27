@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import { ImageOff, Video } from "lucide-react";
 
@@ -6,11 +5,13 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { createClient } from "@/lib/supabase/server";
 import type { GalleryItem } from "@/lib/supabase/types";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Gallery - EARC",
-  description: "Photos and videos from EARC's programmes and workshops.",
-};
+export const metadata = pageMetadata(
+  "/gallery",
+  "Gallery",
+  "Photos and videos from EARC's programmes and workshops.",
+);
 
 export default async function GalleryPage() {
   const supabase = await createClient();

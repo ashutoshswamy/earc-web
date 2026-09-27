@@ -9,6 +9,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { pageMetadata } from "@/lib/seo";
 
 function categoryLabel(id: ProjectCategory) {
   return categories.find((c) => c.id === id)?.label ?? id;
@@ -26,10 +27,7 @@ export async function generateMetadata({
   const { id } = await params;
   const project = projects.find((p) => p.id === id);
   if (!project) return {};
-  return {
-    title: `${project.title} - EARC`,
-    description: project.summary,
-  };
+  return pageMetadata(`/projects/${project.id}`, project.title, project.summary);
 }
 
 export default async function ProjectDetailPage({

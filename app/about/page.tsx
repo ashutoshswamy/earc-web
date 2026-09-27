@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 
 import { SiteHeader } from "@/components/site-header";
 import { AboutHero } from "@/components/about/about-hero";
@@ -10,12 +9,13 @@ import { Testimonial } from "@/components/about/testimonial";
 import { Partners } from "@/components/about/partners";
 import { AboutCta } from "@/components/about/about-cta";
 import { SiteFooter } from "@/components/site-footer";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About Us - EARC",
-  description:
-    "Jnana Prabodhini's Educational Activity Research Centre - our story, leadership, team, and partners.",
-};
+export const metadata = pageMetadata(
+  "/about",
+  "About Us",
+  "Jnana Prabodhini's Educational Activity Research Centre - our story, leadership, team, and partners.",
+);
 
 export default function AboutPage() {
   return (

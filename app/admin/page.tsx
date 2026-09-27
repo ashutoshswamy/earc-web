@@ -44,7 +44,8 @@ import type {
 } from "@/lib/supabase/types";
 
 export const metadata: Metadata = {
-  title: "Admin - EARC",
+  title: "Admin",
+  robots: { index: false, follow: false },
 };
 
 function UploadCard({ children }: { children: React.ReactNode }) {
